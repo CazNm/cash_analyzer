@@ -7,6 +7,7 @@ class MainListViewHome extends StatefulWidget {
   }
 }
 
+// When use stateful widget in Bloc using project
 class MainListViewHomeState extends State<MainListViewHome> {
   @override
   void initState() {
