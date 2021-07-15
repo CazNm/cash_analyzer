@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PaymentInfo {
   int price;
@@ -15,11 +16,16 @@ class PaymentSummaryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      tileColor: Theme.of(context).primaryColorLight,
-      title: Text("${info.price}원"),
-      subtitle: Text(info.time.toString()),
-      trailing: Text(info.summary),
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColorLight,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(children: [
+        Text("${info.price}원"),
+        Text(DateFormat("HH:mm").format(info.time)),
+        Text(info.summary),
+      ],)
     );
     
   }
