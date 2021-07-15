@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+// Define multi-used style like colors or text styles
+// maybe we can make another style file for app's theme selecting function
+
 
 Color mainPink = Color.fromRGBO(255, 200, 200, 1);
 Color mainGreen = Color.fromRGBO(209, 255, 237, 1);
