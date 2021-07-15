@@ -1,3 +1,4 @@
+import 'package:cash_analyzer/screens/detail/detailView.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
@@ -16,32 +17,39 @@ class PaymentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      margin: EdgeInsets.fromLTRB(6, 0, 6, 0),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColorDark,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ListView.builder(
-        itemCount: data.list.length + 1,
-        itemBuilder: (BuildContext context, int index) {
-          Widget w;
-          if (index == 0) {
-            String dateString = DateFormat("MM-dd").format(data.currentDate);
-            if (dateString == DateFormat("MM-dd").format(DateTime.now())) {
-              dateString = "오늘의";
+    return GestureDetector(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => DetailView())),
+      child: Container(
+        width: 200,
+        margin: EdgeInsets.fromLTRB(6, 0, 6, 0),
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColorDark,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ListView.builder(
+          itemCount: data.list.length + 2,
+          itemBuilder: (BuildContext context, int index) {
+            Widget w;
+            if (index == 0) {
+              // first
+              String dateString = DateFormat("MM-dd").format(data.currentDate);
+              if (dateString == DateFormat("MM-dd").format(DateTime.now())) {
+                dateString = "오늘의";
+              }
+              w = Center(child: Text("$dateString 사용 내역"));
+            } else if (index == data.list.length + 1) {
+              // last
+              w = Text("....");
+            } else {
+              w = PaymentSummaryTile(data.list[index - 1]); // general
             }
-            w = Center(child: Text("$dateString 사용 내역"));
-          } else {
-            w = PaymentSummaryTile(data.list[index - 1]);
-          }
-          return Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: w,
-          );
-        },
+            return Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: w,
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,10 +1,9 @@
+// import 'package:cash_analyzer/screens/detail/detailView.dart';
 import 'package:cash_analyzer/screens/main/mainListView.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
-// TODO: Search What Router & Route is
-// something like page router & history function of browser
 class CustomRouter {
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
