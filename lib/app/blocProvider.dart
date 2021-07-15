@@ -4,6 +4,7 @@ export 'bloc.dart';
 
 // general type T inherit Bloc abstract class
 // Any kind of Bloc can be possible
+// like context's provider in react
 class BlocProvider<T extends Bloc> extends InheritedWidget {
   // declaration final member bloc
   // diffrent between final and const is initialize timing
@@ -26,7 +27,6 @@ class BlocProvider<T extends Bloc> extends InheritedWidget {
     return true;
   }
 
-  // return static BlocProvider if given context 
   static BlocProvider? of(BuildContext context) {
     return (context.dependOnInheritedWidgetOfExactType<BlocProvider>());
   }

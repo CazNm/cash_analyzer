@@ -1,4 +1,4 @@
-import 'package:cash_analyzer/mainList/mainListView.dart';
+import 'package:cash_analyzer/screens/main/mainListView.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';

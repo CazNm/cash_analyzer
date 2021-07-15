@@ -1,7 +1,6 @@
+import 'package:cash_analyzer/screens/main/mainListView.dart';
 import 'package:cash_analyzer/app/index.dart';
 import 'package:flutter/material.dart';
-
-import 'mainList/mainListView.dart';
 
 void main() {
   setupLocator();
