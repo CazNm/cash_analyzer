@@ -18,7 +18,11 @@ class PaymentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => DetailView())),
+      onTap: () => Navigator.pushNamed(
+        context,
+        DetailView.routeName,
+        arguments: DetailViewPageArguments(data.list, data.currentDate),
+      ),
       child: Container(
         width: 200,
         margin: EdgeInsets.fromLTRB(6, 0, 6, 0),

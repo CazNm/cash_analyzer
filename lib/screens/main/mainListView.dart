@@ -4,6 +4,8 @@ import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:flutter/material.dart';
 
 class MainListViewHome extends StatefulWidget {
+  static const routeName = '/';
+
   @override
   State<StatefulWidget> createState() {
     return MainListViewHomeState();
@@ -12,8 +14,13 @@ class MainListViewHome extends StatefulWidget {
 
 // When use stateful widget in Bloc using project
 class MainListViewHomeState extends State<MainListViewHome> {
-  final gData = GoalData(300000, 150000, 40000, DateTime.now().subtract(Duration(days: 15)), DateTime.now().add(Duration(days: 15)));
-  
+  final gData = GoalData(
+      300000,
+      150000,
+      40000,
+      DateTime.now().subtract(Duration(days: 15)),
+      DateTime.now().add(Duration(days: 15)));
+
   final pData = [
     PaymentInfo(10000, DateTime.now(), "test payment1"),
     PaymentInfo(21000, DateTime.now(), "test payment2"),
@@ -52,8 +59,9 @@ class MainListViewHomeState extends State<MainListViewHome> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 2,
                 itemBuilder: (BuildContext context, int index) {
-                  return PaymentList(PaymentListData(
-                      pData, DateTime.now().subtract(Duration(days: index))));
+                  return PaymentList(
+                    PaymentListData(pData, DateTime.now().subtract(Duration(days: index)))
+                  );
                 },
               ),
             ),
