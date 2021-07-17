@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PaymentInfo {
   int price;
@@ -13,20 +14,21 @@ class PaymentSummaryTile {
 
   PaymentSummaryTile(this.info);
 
-  Widget get build => Container(
-        constraints: BoxConstraints(maxHeight: 161, maxWidth: 100),
-        margin: EdgeInsets.fromLTRB(0, 0, 14, 0),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
         decoration: BoxDecoration(
-            color: Colors.amberAccent, borderRadius: BorderRadius.circular(12)),
+          color: Theme.of(context).primaryColorLight,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("${info.price}원"),
-            Text(info.time.toString()),
+            Text(DateFormat("HH:mm").format(info.time)),
             Text(info.summary),
           ],
-        ),
-      );
+        ));
+  }
 }
 
 //  title: Text("${info.price}원"),
