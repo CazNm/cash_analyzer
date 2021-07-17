@@ -1,13 +1,14 @@
+import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:cash_analyzer/screens/detail/detailView.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 
 class PaymentListData {
-  List<PaymentInfo> list;
+  List<PaymentInfo> paymentInfoList;
   DateTime currentDate;
 
-  PaymentListData(this.list, this.currentDate);
+  PaymentListData(this.paymentInfoList, this.currentDate);
 }
 
 class PaymentList extends StatelessWidget {
@@ -18,10 +19,9 @@ class PaymentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
+      onTap: () => service!.navigateTo(
         DetailView.routeName,
-        arguments: DetailViewPageArguments(data.list, data.currentDate),
+        arguments: DetailViewPageArguments(data.paymentInfoList, data.currentDate),
       ),
       child: Container(
         width: 200,
@@ -32,7 +32,7 @@ class PaymentList extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListView.builder(
-          itemCount: data.list.length + 2,
+          itemCount: data.paymentInfoList.length + 2,
           itemBuilder: (BuildContext context, int index) {
             Widget w;
             if (index == 0) {
@@ -42,11 +42,11 @@ class PaymentList extends StatelessWidget {
                 dateString = "오늘의";
               }
               w = Center(child: Text("$dateString 사용 내역"));
-            } else if (index == data.list.length + 1) {
+            } else if (index == data.paymentInfoList.length + 1) {
               // last
               w = Text("....");
             } else {
-              w = PaymentSummaryTile(data.list[index - 1])
+              w = PaymentSummaryTile(data.paymentInfoList[index - 1])
                   .build(context); // general
             }
             return Padding(

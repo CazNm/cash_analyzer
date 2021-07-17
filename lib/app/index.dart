@@ -29,13 +29,15 @@ double height = MediaQuery.of(context!).size.height;
 class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey =
       new GlobalKey<NavigatorState>();
-  Future<dynamic> navigateTo(String routeName) {
-    return navigatorKey.currentState!.pushNamed(routeName);
+  Future<dynamic> navigateTo(String routeName, {Object? arguments}) {
+    return navigatorKey.currentState!
+        .pushNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> pushRemoveUntil(String routeName) {
-    return navigatorKey.currentState!
-        .pushNamedAndRemoveUntil(routeName, (route) => false);
+  Future<dynamic> pushRemoveUntil(String routeName, {Object? arguments}) {
+    return navigatorKey.currentState!.pushNamedAndRemoveUntil(
+        routeName, (route) => false,
+        arguments: arguments);
   }
 }
 

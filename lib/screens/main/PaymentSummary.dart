@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 class PaymentInfo {
   int price;
   DateTime time;
-  String summary;
+  String desc;
 
-  PaymentInfo(this.price, this.time, this.summary);
+  PaymentInfo(this.price, this.time, this.desc);
 }
 
 class PaymentSummaryTile {
@@ -25,12 +25,12 @@ class PaymentSummaryTile {
           children: [
             Text("${info.price}원"),
             Text(DateFormat("HH:mm").format(info.time)),
-            Text(info.summary),
+            Text(info.desc),
           ],
         ));
   }
 }
 
-//  title: Text("${info.price}원"),
+//         title: Text("${info.price}원"),
 //         subtitle: Text(info.time.toString()),
 //         trailing: Text(info.summary),
