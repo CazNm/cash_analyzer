@@ -1,3 +1,5 @@
+import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/screens/edit/editView.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:flutter/material.dart';
 
@@ -65,19 +67,22 @@ class _DetailViewState extends State<DetailView> {
             Container(
               height: 400,
               child: ListView.builder(
-                  itemCount: data.paymentList.length + 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == data.paymentList.length) {
-                      return IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.add),
-                      );
-                    }
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: PaymentSummaryTile(data.paymentList[index]).build(context),
+                itemCount: data.paymentList.length + 1,
+                itemBuilder: (BuildContext context, int index) {
+                  if (index == data.paymentList.length) {
+                    return IconButton(
+                      onPressed: () => service!.navigateTo(
+                        EditView.routeName,
+                      ),
+                      icon: Icon(Icons.add),
                     );
-                  }),
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: PaymentSummaryTile(data.paymentList[index]).build(context),
+                  );
+                }
+              ),
             )
           ],
         ),
