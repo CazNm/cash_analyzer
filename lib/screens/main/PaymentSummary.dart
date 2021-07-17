@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cash_analyzer/app/index.dart';
 
 class PaymentInfo {
   int price;
@@ -17,15 +18,19 @@ class PaymentSummaryTile {
   @override
   Widget build(BuildContext context) {
     return Container(
+        padding: EdgeInsets.only(bottom: 7),
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColorLight,
-          borderRadius: BorderRadius.circular(10),
-        ),
+            border: Border(bottom: BorderSide(width: 1, color: white))),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("${info.price}원"),
-            Text(DateFormat("HH:mm").format(info.time)),
-            Text(info.summary),
+            Text(
+              DateFormat("HH:mm").format(info.time),
+              style: whiteText(size: 14),
+            ),
+            SizedBox(height: 2),
+            Text(info.summary, style: whiteText(size: 12)),
+            Text("${info.price}원", style: whiteText(size: 12)),
           ],
         ));
   }

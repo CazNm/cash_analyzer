@@ -1,3 +1,4 @@
+import 'package:cash_analyzer/app/index.dart';
 import 'package:cash_analyzer/screens/detail/detailView.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -25,10 +26,10 @@ class PaymentList extends StatelessWidget {
       ),
       child: Container(
         width: 200,
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColorDark,
-          borderRadius: BorderRadius.circular(10),
+          color: salmon,
+          borderRadius: BorderRadius.circular(8),
         ),
         child: ListView.builder(
           itemCount: data.list.length + 2,
@@ -40,16 +41,24 @@ class PaymentList extends StatelessWidget {
               if (dateString == DateFormat("MM-dd").format(DateTime.now())) {
                 dateString = "오늘의";
               }
-              w = Center(child: Text("$dateString 사용 내역"));
+              w = Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "$dateString 사용 내역",
+                    style: whiteText(size: 16, fontWeight: FontWeight.w400),
+                  ));
             } else if (index == data.list.length + 1) {
               // last
-              w = Text("....");
+              w = Text(
+                "....",
+                style: whiteText(),
+              );
             } else {
               w = PaymentSummaryTile(data.list[index - 1])
                   .build(context); // general
             }
             return Padding(
-              padding: const EdgeInsets.only(top: 4),
+              padding: const EdgeInsets.only(top: 20),
               child: w,
             );
           },

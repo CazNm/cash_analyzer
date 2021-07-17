@@ -57,7 +57,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
                   flex: 35,
                   child: Column(
                     children: [
-                      SizedBox(height: 70),
+                      SizedBox(height: 40),
                       GoalSection(gData),
                     ],
                   )),
@@ -87,7 +87,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
           ),
         ),
         floatingActionButton: IconButton(
-          icon: const Icon(Icons.settings),
+          icon: Icon(Icons.settings, color: white),
           onPressed: () {
             print("setting button");
           },

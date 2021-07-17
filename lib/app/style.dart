@@ -12,6 +12,7 @@ Color grey217 = Color.fromRGBO(217, 217, 217, 1.0);
 Color grey247 = Color.fromRGBO(247, 247, 247, 1.0);
 Color navyDark = Color.fromRGBO(10, 20, 36, 1.0);
 Color balck = Color.fromRGBO(34, 34, 34, 1.0);
+Color salmon = Color.fromRGBO(227, 119, 107, 1.0);
 
 // why not?
 const double defaultTextSize = 12;

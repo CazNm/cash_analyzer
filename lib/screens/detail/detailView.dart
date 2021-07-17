@@ -1,3 +1,4 @@
+import 'package:cash_analyzer/app/index.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:flutter/material.dart';
 
@@ -51,37 +52,63 @@ class _DetailViewState extends State<DetailView> {
       use += element.price;
     });
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Cazh Analyzer"),
-        ),
-      ),
-      body: Container(
-        child: Column(
-          children: [
-            Text("${data.date.toString()} 사용 내역"),
-            Text("총 : $use"),
-            Container(
-              height: 400,
-              child: ListView.builder(
-                  itemCount: data.paymentList.length + 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == data.paymentList.length) {
-                      return IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.add),
-                      );
-                    }
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: PaymentSummaryTile(data.paymentList[index]).build(context),
-                    );
-                  }),
-            )
-          ],
-        ),
-      ),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: grey48,
+          body: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(48, 60, 48, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${data.date.toString()} 사용 내역",
+                      style: whiteText(size: 22, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 6),
+                    Text(
+                      "총 : $use",
+                      style: whiteText(size: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 50),
+                    Expanded(
+                      flex: 1,
+                      child: ListView.builder(
+                          itemCount: data.paymentList.length + 1,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (index == data.paymentList.length) {
+                              return Container(
+                                alignment: Alignment.bottomLeft,
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.add, color: white),
+                                  iconSize: 40,
+                                ),
+                              );
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: PaymentSummaryTile(data.paymentList[index])
+                                  .build(context),
+                            );
+                          }),
+                    )
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.cancel, color: white),
+                ),
+              )
+            ],
+          )),
     );
   }
 }
