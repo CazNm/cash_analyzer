@@ -25,7 +25,6 @@ class PaymentList extends StatelessWidget {
       ),
       child: Container(
         width: 200,
-        margin: EdgeInsets.fromLTRB(6, 0, 6, 0),
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColorDark,
