@@ -18,12 +18,13 @@ class MainListViewHome extends StatefulWidget {
 
 // When use stateful widget in Bloc using project
 class MainListViewHomeState extends State<MainListViewHome> {
-  final gData = GoalData(
-      300000,
-      150000,
-      40000,
-      DateTime.now().subtract(Duration(days: 15)),
-      DateTime.now().add(Duration(days: 15)));
+  final gData = SessionInfo(
+    300000,
+    150000,
+    40000,
+    DateTime.now().subtract(Duration(days: 15)),
+    DateTime.now().add(Duration(days: 15))
+  );
 
   final pData = [
     PaymentInfo(10000, DateTime.now(), "test payment1"),
@@ -51,7 +52,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
       child: Scaffold(
         backgroundColor: black48,
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 32),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
               Expanded(
@@ -90,7 +91,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
         floatingActionButton: IconButton(
           icon: Icon(Icons.settings, color: white),
           onPressed: () {
-            service!.navigateTo('/setting');
+            service!.navigateTo(SettingPage.routeName);
             print("setting button");
           },
         ),

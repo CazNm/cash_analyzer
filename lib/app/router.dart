@@ -1,4 +1,5 @@
 // import 'package:cash_analyzer/screens/detail/detailView.dart';
+import 'package:cash_analyzer/screens/edit/editView.dart';
 import 'package:cash_analyzer/screens/main/mainListView.dart';
 import 'package:cash_analyzer/screens/detail/detailView.dart';
 import 'package:cash_analyzer/screens/setting/setting.dart';
@@ -18,7 +19,12 @@ class CustomRouter {
                   args: settings.arguments as DetailViewPageArguments,
                 ));
 
-      case '/setting':
+      case EditView.routeName:
+        return MaterialPageRoute(builder: (context) => EditView(
+          args: settings.arguments as EditViewPageArguments,
+        ));
+
+      case SettingPage.routeName:
         return MaterialPageRoute(builder: (_) => SettingPage());
 
       // 404 not found lol

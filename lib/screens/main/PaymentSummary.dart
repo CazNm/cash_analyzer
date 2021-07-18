@@ -5,9 +5,9 @@ import 'package:cash_analyzer/app/index.dart';
 class PaymentInfo {
   int price;
   DateTime time;
-  String summary;
+  String desc;
 
-  PaymentInfo(this.price, this.time, this.summary);
+  PaymentInfo(this.price, this.time, this.desc);
 }
 
 class PaymentSummaryTile {
@@ -16,7 +16,6 @@ class PaymentSummaryTile {
 
   PaymentSummaryTile(this.info, {this.detail = false});
 
-  @override
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.only(bottom: 7),
@@ -28,7 +27,7 @@ class PaymentSummaryTile {
             Text(DateFormat("HH:mm").format(info.time),
                 style: whiteText(size: detail ? 18 : 14, lineHeight: 1.2)),
             SizedBox(height: 2),
-            Text(info.summary,
+            Text(info.desc,
                 style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
             Text("${info.price}원",
                 style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
@@ -37,6 +36,6 @@ class PaymentSummaryTile {
   }
 }
 
-//  title: Text("${info.price}원"),
+//         title: Text("${info.price}원"),
 //         subtitle: Text(info.time.toString()),
 //         trailing: Text(info.summary),

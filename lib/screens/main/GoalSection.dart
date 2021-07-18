@@ -2,18 +2,19 @@ import 'package:cash_analyzer/app/index.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class GoalData {
-  int goal;
+class SessionInfo {
+  int budget;
   int totalUse;
   int todayUse;
   DateTime sDay;
   DateTime dDay;
 
-  GoalData(this.goal, this.totalUse, this.todayUse, this.sDay, this.dDay);
+  SessionInfo(this.budget, this.totalUse, this.todayUse, this.sDay, this.dDay);
 }
 
 class GoalSection extends StatelessWidget {
-  final GoalData data;
+  final SessionInfo data;
+  
   const GoalSection(this.data, {Key? key}) : super(key: key);
 
   @override
@@ -35,7 +36,7 @@ class GoalSection extends StatelessWidget {
                             whiteText(size: 28, fontWeight: FontWeight.bold)),
                     SizedBox(height: 12),
                     Text(
-                      "${data.totalUse}원/${data.goal}원",
+                      "${data.totalUse}원/${data.budget}원",
                       style: whiteText(size: 22, fontWeight: FontWeight.normal),
                     ),
                   ],

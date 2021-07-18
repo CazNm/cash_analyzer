@@ -22,3 +22,7 @@ doc/api/
 
 # personal editor setings
 .vscode
+
+# flutter auto generated files
+.flutter-plugins
+.flutter-plugins-dependencies

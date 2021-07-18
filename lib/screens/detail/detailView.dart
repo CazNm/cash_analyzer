@@ -1,4 +1,5 @@
 import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/screens/edit/editView.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:flutter/material.dart';
 
@@ -88,7 +89,10 @@ class _DetailViewState extends State<DetailView> {
                                   return Container(
                                     alignment: Alignment.bottomLeft,
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () => service!.navigateTo(
+                                        EditView.routeName,
+                                        arguments: EditViewPageArguments(data.date)
+                                      ),
                                       icon: Icon(Icons.add, color: white),
                                       iconSize: 40,
                                     ),
