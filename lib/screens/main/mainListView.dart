@@ -3,6 +3,7 @@ import 'package:cash_analyzer/app/index.dart';
 import 'package:cash_analyzer/screens/main/GoalSection.dart';
 import 'package:cash_analyzer/screens/main/PaymentList.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
+import 'package:cash_analyzer/screens/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:cash_analyzer/data/file.dart';
 
@@ -48,7 +49,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: grey48,
+        backgroundColor: black48,
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 32),
           child: Column(
@@ -89,6 +90,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
         floatingActionButton: IconButton(
           icon: Icon(Icons.settings, color: white),
           onPressed: () {
+            service!.navigateTo('/setting');
             print("setting button");
           },
         ),

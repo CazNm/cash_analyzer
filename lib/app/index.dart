@@ -29,6 +29,7 @@ double height = MediaQuery.of(context!).size.height;
 class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey =
       new GlobalKey<NavigatorState>();
+
   Future<dynamic> navigateTo(String routeName) {
     return navigatorKey.currentState!.pushNamed(routeName);
   }

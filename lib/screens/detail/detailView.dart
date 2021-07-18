@@ -54,7 +54,7 @@ class _DetailViewState extends State<DetailView> {
 
     return SafeArea(
       child: Scaffold(
-          backgroundColor: grey48,
+          backgroundColor: black48,
           body: Stack(
             children: [
               Container(
@@ -74,25 +74,39 @@ class _DetailViewState extends State<DetailView> {
                     SizedBox(height: 50),
                     Expanded(
                       flex: 1,
-                      child: ListView.builder(
-                          itemCount: data.paymentList.length + 1,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index == data.paymentList.length) {
-                              return Container(
-                                alignment: Alignment.bottomLeft,
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.add, color: white),
-                                  iconSize: 40,
-                                ),
-                              );
-                            }
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: PaymentSummaryTile(data.paymentList[index])
-                                  .build(context),
-                            );
-                          }),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: salmon,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: ListView.builder(
+                              itemCount: data.paymentList.length + 1,
+                              itemBuilder: (BuildContext context, int index) {
+                                if (index == data.paymentList.length) {
+                                  return Container(
+                                    alignment: Alignment.bottomLeft,
+                                    child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(Icons.add, color: white),
+                                      iconSize: 40,
+                                    ),
+                                  );
+                                }
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: PaymentSummaryTile(
+                                          data.paymentList[index],
+                                          detail: true)
+                                      .build(context),
+                                );
+                              }),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * (0.2),
                     )
                   ],
                 ),

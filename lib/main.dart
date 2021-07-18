@@ -16,13 +16,13 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0.5)));
     return MaterialApp(
-      theme: ThemeData(),
+      theme: ThemeData(
+        accentColor: white,
+      ),
       title: 'Flutter Demo',
       onGenerateRoute: router.generateRoute,
       home: MainListViewHome(),
       navigatorKey: service!.navigatorKey,
     );
   }
-
 }
-

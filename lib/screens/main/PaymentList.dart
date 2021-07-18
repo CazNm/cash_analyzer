@@ -26,42 +26,46 @@ class PaymentList extends StatelessWidget {
       ),
       child: Container(
         width: 200,
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
         decoration: BoxDecoration(
           color: salmon,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: ListView.builder(
-          itemCount: data.list.length + 2,
-          itemBuilder: (BuildContext context, int index) {
-            Widget w;
-            if (index == 0) {
-              // first
-              String dateString = DateFormat("MM-dd").format(data.currentDate);
-              if (dateString == DateFormat("MM-dd").format(DateTime.now())) {
-                dateString = "오늘의";
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: ListView.builder(
+            itemCount: data.list.length + 2,
+            itemBuilder: (BuildContext context, int index) {
+              Widget w;
+              if (index == 0) {
+                // first
+                String dateString =
+                    DateFormat("MM-dd").format(data.currentDate);
+                if (dateString == DateFormat("MM-dd").format(DateTime.now())) {
+                  dateString = "오늘의";
+                }
+                w = Container(
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "$dateString 사용 내역",
+                      style: whiteText(size: 16, fontWeight: FontWeight.w400),
+                    ));
+              } else if (index == data.list.length + 1) {
+                // last
+                w = Text(
+                  "....",
+                  style: whiteText(),
+                );
+              } else {
+                w = PaymentSummaryTile(data.list[index - 1])
+                    .build(context); // general
               }
-              w = Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "$dateString 사용 내역",
-                    style: whiteText(size: 16, fontWeight: FontWeight.w400),
-                  ));
-            } else if (index == data.list.length + 1) {
-              // last
-              w = Text(
-                "....",
-                style: whiteText(),
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(12, 20, 12, 0),
+                child: w,
               );
-            } else {
-              w = PaymentSummaryTile(data.list[index - 1])
-                  .build(context); // general
-            }
-            return Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: w,
-            );
-          },
+            },
+          ),
         ),
       ),
     );

@@ -12,8 +12,9 @@ class PaymentInfo {
 
 class PaymentSummaryTile {
   final PaymentInfo info;
+  final bool detail;
 
-  PaymentSummaryTile(this.info);
+  PaymentSummaryTile(this.info, {this.detail = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +25,13 @@ class PaymentSummaryTile {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              DateFormat("HH:mm").format(info.time),
-              style: whiteText(size: 14),
-            ),
+            Text(DateFormat("HH:mm").format(info.time),
+                style: whiteText(size: detail ? 18 : 14, lineHeight: 1.2)),
             SizedBox(height: 2),
-            Text(info.summary, style: whiteText(size: 12)),
-            Text("${info.price}원", style: whiteText(size: 12)),
+            Text(info.summary,
+                style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
+            Text("${info.price}원",
+                style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
           ],
         ));
   }
