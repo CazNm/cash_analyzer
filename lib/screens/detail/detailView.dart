@@ -83,34 +83,33 @@ class _DetailViewState extends State<DetailView> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: ListView.builder(
-                              itemCount: data.paymentList.length + 1,
-                              itemBuilder: (BuildContext context, int index) {
-                                if (index == data.paymentList.length) {
-                                  return Container(
-                                    alignment: Alignment.bottomLeft,
-                                    child: IconButton(
-                                      onPressed: () => service!.navigateTo(
-                                        EditView.routeName,
-                                        arguments: EditViewPageArguments(data.date)
-                                      ),
-                                      icon: Icon(Icons.add, color: white),
-                                      iconSize: 40,
-                                    ),
-                                  );
-                                }
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: PaymentSummaryTile(
-                                          data.paymentList[index],
-                                          detail: true)
-                                      .build(context),
-                                );
-                              }),
+                            itemCount: data.paymentList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: PaymentSummaryTile(
+                                        data.paymentList[index],
+                                        detail: true)
+                                    .build(context),
+                              );
+                            }
+                          ),
                         ),
                       ),
                     ),
+                    Container(
+                      alignment: Alignment.bottomLeft,
+                      child: IconButton(
+                        onPressed: () => service!.navigateTo(
+                          EditView.routeName,
+                          arguments: EditViewPageArguments(data.date)
+                        ),
+                        icon: Icon(Icons.add, color: white),
+                        iconSize: 40,
+                      ),
+                    ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * (0.2),
+                      height: MediaQuery.of(context).size.height * (0.15),
                     )
                   ],
                 ),

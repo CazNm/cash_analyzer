@@ -18,21 +18,36 @@ class PaymentSummaryTile {
 
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(bottom: 7),
-        decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(width: 1, color: white))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      padding: EdgeInsets.only(bottom: 7),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 1, color: white))),
+      child: Material(
+        type: MaterialType.transparency,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(DateFormat("HH:mm").format(info.time),
-                style: whiteText(size: detail ? 18 : 14, lineHeight: 1.2)),
-            SizedBox(height: 2),
-            Text(info.desc,
-                style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
-            Text("${info.price}원",
-                style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(DateFormat("HH:mm").format(info.time),
+                    style: whiteText(size: detail ? 18 : 14, lineHeight: 1.2)),
+                SizedBox(height: 2),
+                Text(info.desc,
+                    style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
+                Text("${info.price}원",
+                    style: whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
+              ],
+            ),
+            detail ? IconButton(
+              onPressed: (){},
+              icon: Icon(Icons.delete, color: white),
+              iconSize: 20,
+              splashRadius: 20,
+            ) : Container(),
           ],
-        ));
+        ),
+      )
+    );
   }
 }
 
