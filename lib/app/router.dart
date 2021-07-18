@@ -19,7 +19,9 @@ class CustomRouter {
                 ));
 
       case EditView.routeName:
-        return MaterialPageRoute(builder: (context) => EditView());
+        return MaterialPageRoute(builder: (context) => EditView(
+          args: settings.arguments as EditViewPageArguments,
+        ));
 
       // 404 not found lol
       default:

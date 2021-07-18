@@ -1,10 +1,18 @@
 import 'package:cash_analyzer/app/index.dart';
 import 'package:flutter/material.dart';
 
+class EditViewPageArguments extends Object {
+  final DateTime date;
+
+  EditViewPageArguments(this.date);
+}
+
 class EditView extends StatefulWidget {
   static const routeName = '/edit';
 
-  const EditView({Key? key}) : super(key: key);
+  final EditViewPageArguments args;
+
+  const EditView({required this.args, Key? key}) : super(key: key);
 
   @override
   _EditViewState createState() => _EditViewState();
@@ -15,7 +23,7 @@ class _EditViewState extends State<EditView> {
   final TextEditingController _controller = TextEditingController();
 
   double price = 10000;
-  TimeOfDay date = TimeOfDay.now();
+  TimeOfDay time = TimeOfDay.fromDateTime(DateTime.now().toLocal());
 
   @override
   void initState() {
@@ -27,6 +35,7 @@ class _EditViewState extends State<EditView> {
 
   @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
   }
 
@@ -85,12 +94,12 @@ class _EditViewState extends State<EditView> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text(date.format(context)),
+                  child: Text(time.format(context)),
                   onPressed: () async {
                     TimeOfDay? selected = await showTimePicker(
-                        context: context, initialTime: date);
+                        context: context, initialTime: time);
                     setState(() {
-                      date = selected != null ? selected : date;
+                      time = selected != null ? selected : time;
                     });
                   },
                 ),
@@ -98,7 +107,7 @@ class _EditViewState extends State<EditView> {
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Validate will return true if the form is valid, or false if
+                      // Valitime will return true if the form is valid, or false if
                       // the form is invalid.
                       if (_formKey.currentState!.validate()) {
                         // Process data.

@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:cash_analyzer/app/index.dart';
 import 'package:path_provider/path_provider.dart';
 
+// flutter 2.13.0 or above
+// typedef Json = Map<String, dynamic>;
 
 List<dynamic> saveDataList = [
   {"title": "test", "kinds": "food", "krw": "2000", "date": "2021-07-16"},
