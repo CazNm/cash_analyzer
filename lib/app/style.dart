@@ -9,17 +9,20 @@ Color grey138 = Color.fromRGBO(138, 138, 138, 1.0);
 Color grey204 = Color.fromRGBO(204, 204, 204, 1.0);
 Color grey217 = Color.fromRGBO(217, 217, 217, 1.0);
 Color grey247 = Color.fromRGBO(247, 247, 247, 1.0);
+Color navyDark = Color.fromRGBO(10, 20, 36, 1.0);
+Color balck = Color.fromRGBO(34, 34, 34, 1.0);
+Color black48 = Color.fromRGBO(48, 48, 48, 1.0);
+Color salmon = Color.fromRGBO(227, 119, 107, 1.0);
+Color lightBlue = Color.fromRGBO(180, 240, 255, 1.0);
 
 // why not?
 const double defaultTextSize = 12;
 const FontWeight defaultfontWeight = FontWeight.normal;
 TextStyle defaultText(
-    { double size = defaultTextSize, FontWeight fontWeight = FontWeight.normal, required Color color }) {
-  return TextStyle (
-    fontSize: size,
-    fontWeight: fontWeight,
-    color: color
-  );
+    {double size = defaultTextSize,
+    FontWeight fontWeight = FontWeight.normal,
+    required Color color}) {
+  return TextStyle(fontSize: size, fontWeight: fontWeight, color: color);
 }
 
 TextStyle grey138Text(
@@ -49,8 +52,11 @@ TextStyle grey217Text(
 }
 
 TextStyle whiteText(
-    {double size = 12, FontWeight fontWeight = FontWeight.normal}) {
-  return TextStyle(fontSize: size, fontWeight: fontWeight, color: white);
+    {double size = 12,
+    FontWeight fontWeight = FontWeight.normal,
+    double lineHeight = 1.0}) {
+  return TextStyle(
+      fontSize: size, fontWeight: fontWeight, color: white, height: lineHeight);
 }
 
 TextStyle mainPinkText(

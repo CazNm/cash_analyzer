@@ -2,6 +2,7 @@
 import 'package:cash_analyzer/screens/edit/editView.dart';
 import 'package:cash_analyzer/screens/main/mainListView.dart';
 import 'package:cash_analyzer/screens/detail/detailView.dart';
+import 'package:cash_analyzer/screens/setting/setting.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -22,6 +23,9 @@ class CustomRouter {
         return MaterialPageRoute(builder: (context) => EditView(
           args: settings.arguments as EditViewPageArguments,
         ));
+        
+      case '/setting':
+        return MaterialPageRoute(builder: (_) => SettingPage());
 
       // 404 not found lol
       default:

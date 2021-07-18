@@ -3,6 +3,7 @@ import 'package:cash_analyzer/app/index.dart';
 import 'package:cash_analyzer/screens/main/GoalSection.dart';
 import 'package:cash_analyzer/screens/main/PaymentList.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
+import 'package:cash_analyzer/screens/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:cash_analyzer/data/file.dart';
 
@@ -47,38 +48,53 @@ class MainListViewHomeState extends State<MainListViewHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Cazh Analyzer"),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: black48,
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 32),
+          child: Column(
+            children: [
+              Expanded(
+                  flex: 35,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 40),
+                      GoalSection(gData),
+                    ],
+                  )),
+              Expanded(
+                flex: 65,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.only(bottom: 30),
+                  child: Container(
+                    constraints: BoxConstraints(maxHeight: 350),
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 2,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          margin: EdgeInsets.only(right: index != 1 ? 18 : 0),
+                          child: PaymentList(PaymentListData(pData,
+                              DateTime.now().subtract(Duration(days: index)))),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(4),
-        child: Column(
-          children: [
-            GoalSection(gData),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 2,
-                itemBuilder: (BuildContext context, int index) {
-                  return PaymentList(
-                    PaymentListData(pData, DateTime.now().subtract(Duration(days: index)))
-                  );
-                },
-              ),
-            ),
-          ],
+        floatingActionButton: IconButton(
+          icon: Icon(Icons.settings, color: white),
+          onPressed: () {
+            service!.navigateTo('/setting');
+            print("setting button");
+          },
         ),
-      ),
-      floatingActionButton: IconButton(
-        icon: const Icon(Icons.settings),
-        onPressed: () {
-          print("setting button");
-        },
       ),
     );
   }
