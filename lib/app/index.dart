@@ -12,15 +12,6 @@ import 'package:get_it/get_it.dart';
 GetIt locator = GetIt.instance;
 NavigationService? service; // it use gps??
 
-/*** About Null Safety ***
- * ? after variable mean this var can be null
- * ! after variable mean this var is sure not to contain Null
- * -> normally, ! uses question_declared variable because other variable type always contain proper value
- * plus, late some_var_type some_var_name mean this var can be assigned later & sure not to be Null
- * -> we cannot declare variable without initializing basically?
- * oh shit;
- */
-
 BuildContext? context = service!.navigatorKey.currentContext;
 
 double width = MediaQuery.of(context!).size.width;

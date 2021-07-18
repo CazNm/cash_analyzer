@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cash_analyzer/app/index.dart';
 
 class SettingPage extends StatefulWidget {
+  static const routeName = '/setting';
+
   @override
   State<StatefulWidget> createState() {
     return SettingPageState();
@@ -24,14 +26,13 @@ class SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return SafeArea(
       child: Scaffold(
           backgroundColor: black48,
           body: Stack(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 40),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
                     SizedBox(height: 80),

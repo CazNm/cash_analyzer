@@ -16,7 +16,6 @@ class PaymentSummaryTile {
 
   PaymentSummaryTile(this.info, {this.detail = false});
 
-  @override
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.only(bottom: 7),

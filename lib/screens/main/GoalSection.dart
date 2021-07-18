@@ -36,7 +36,7 @@ class GoalSection extends StatelessWidget {
                             whiteText(size: 28, fontWeight: FontWeight.bold)),
                     SizedBox(height: 12),
                     Text(
-                      "${data.totalUse}원/${data.goal}원",
+                      "${data.totalUse}원/${data.budget}원",
                       style: whiteText(size: 22, fontWeight: FontWeight.normal),
                     ),
                   ],

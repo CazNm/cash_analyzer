@@ -1,8 +1,5 @@
 import 'package:cash_analyzer/app/index.dart';
-<<<<<<< HEAD
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
-=======
->>>>>>> 4529cc0850cb89bb10722f76a60100b7625c76a8
 import 'package:cash_analyzer/screens/detail/detailView.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

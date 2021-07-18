@@ -23,8 +23,8 @@ class CustomRouter {
         return MaterialPageRoute(builder: (context) => EditView(
           args: settings.arguments as EditViewPageArguments,
         ));
-        
-      case '/setting':
+
+      case SettingPage.routeName:
         return MaterialPageRoute(builder: (_) => SettingPage());
 
       // 404 not found lol

@@ -53,43 +53,6 @@ class _DetailViewState extends State<DetailView> {
       use += element.price;
     });
 
-<<<<<<< HEAD
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Cazh Analyzer"),
-        ),
-      ),
-      body: Container(
-        child: Column(
-          children: [
-            Text("${data.date.toString()} 사용 내역"),
-            Text("총 : $use"),
-            Container(
-              height: 400,
-              child: ListView.builder(
-                itemCount: data.paymentList.length + 1,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == data.paymentList.length) {
-                    return IconButton(
-                      onPressed: () => service!.navigateTo(
-                        EditView.routeName,
-                        arguments: EditViewPageArguments(data.date)
-                      ),
-                      icon: Icon(Icons.add),
-                    );
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: PaymentSummaryTile(data.paymentList[index]).build(context),
-                  );
-                }
-              ),
-            )
-          ],
-        ),
-      ),
-=======
     return SafeArea(
       child: Scaffold(
           backgroundColor: black48,
@@ -126,7 +89,10 @@ class _DetailViewState extends State<DetailView> {
                                   return Container(
                                     alignment: Alignment.bottomLeft,
                                     child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () => service!.navigateTo(
+                                        EditView.routeName,
+                                        arguments: EditViewPageArguments(data.date)
+                                      ),
                                       icon: Icon(Icons.add, color: white),
                                       iconSize: 40,
                                     ),
@@ -161,7 +127,6 @@ class _DetailViewState extends State<DetailView> {
               )
             ],
           )),
->>>>>>> 4529cc0850cb89bb10722f76a60100b7625c76a8
     );
   }
 }

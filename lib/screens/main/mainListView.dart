@@ -52,7 +52,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
       child: Scaffold(
         backgroundColor: black48,
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 32),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
               Expanded(
@@ -91,7 +91,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
         floatingActionButton: IconButton(
           icon: Icon(Icons.settings, color: white),
           onPressed: () {
-            service!.navigateTo('/setting');
+            service!.navigateTo(SettingPage.routeName);
             print("setting button");
           },
         ),
