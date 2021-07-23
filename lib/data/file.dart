@@ -13,41 +13,32 @@ Map<String, dynamic> saveDataList = {
         'budget': 300000,
         'totalUse': 30000,
         'sDay': '2021-07-02',
-        'dDay':  '2021-08-01'
+        'dDay': '2021-08-01'
       },
-
-      'PaymentListPerDay': [
+      'paymentListData': [
         {
           'date': '2021-07-16',
-          'paymentInfoList': [
+          'paymentList': [
             {
               'title': '점심',
               'desc': '버거킹 몬스터와퍼 세트',
               'time': '2021-07-16 17:32:14:223',
               'price': 9000,
-              'tags': [
-                'food'
-              ]
+              'tags': ['food']
             },
-
             {
               'title': '택시비',
               'desc': '버스 터미널 가는 택시비',
               'time': '2021-07-16 18:04:56:429',
               'price': 6000,
-              'tags': [
-                'transfer'
-              ]
+              'tags': ['transfer']
             },
-
             {
               'title': '버스비',
               'desc': '집가는 시외버스 티켓',
               'time': '2021-07-16 18:21:22:556',
               'price': 15000,
-              'tags': [
-                'transfer'
-              ]
+              'tags': ['transfer']
             }
           ]
         }
@@ -66,7 +57,7 @@ Future<File> get _localFile async {
   return File('$path/analysData.txt');
 }
 
-Future<Map<String, dynamic>> loadLocalData() async {
+Future<Map<String, dynamic>?> loadLocalData() async {
   try {
     final file = await _localFile;
 
@@ -78,25 +69,33 @@ Future<Map<String, dynamic>> loadLocalData() async {
     print(_data);
     return _data;
   } catch (e) {
-    // 에러가 발생할 경우 0을 반환.
-    return {"data": null};
+    // 에러가 발생할 경우 null을 반환.
+    print("error in loadLocalData");
   }
 }
 
-Future<File> saveLocalDataFromParsedJson(Map<String, dynamic> data) async {
-  print(jsonEncode(data));
-  final file = await _localFile;
+Future<File?> saveLocalDataFromParsedJson(Map<String, dynamic> data) async {
+  try {
+    print(jsonEncode(data));
+    final file = await _localFile;
 
-  // 파일 쓰기
-  return file.writeAsString(jsonEncode(data), flush: true);
+    // 파일 쓰기
+    return file.writeAsString(jsonEncode(data), flush: true);
+  } catch (e) {
+    print("error in saveLocalDataFromParsedJson");
+    }
 }
 
-Future<File> saveLocalDataFromObject(Object data) async {
-  print(jsonEncode(data));
-  final file = await _localFile;
+Future<File?> saveLocalDataFromObject(Object data) async {
+  try {
+    print(jsonEncode(data));
+    final file = await _localFile;
 
-  // 파일 쓰기
-  return file.writeAsString(jsonEncode(data), flush: true);
+    // 파일 쓰기
+    return file.writeAsString(jsonEncode(data), flush: true);
+  } catch (e) {
+    print("error in saveLocalDataFromObject");
+    }
 }
 
 //jsonData 형식
@@ -107,4 +106,3 @@ Future<File> saveLocalDataFromObject(Object data) async {
 // ]
 // 데이터 리스트에 Json 형식으로 고정하는 형태
 //}
-
