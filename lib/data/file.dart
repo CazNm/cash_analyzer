@@ -15,34 +15,31 @@ Map<String, dynamic> saveDataList = {
         'sDay': '2021-07-02',
         'dDay': '2021-08-01'
       },
-      'paymentListData': [
-        {
-          'date': '2021-07-16',
-          'paymentList': [
-            {
-              'title': '점심',
-              'desc': '버거킹 몬스터와퍼 세트',
-              'time': '2021-07-16 17:32:14:223',
-              'price': 9000,
-              'tags': ['food']
-            },
-            {
-              'title': '택시비',
-              'desc': '버스 터미널 가는 택시비',
-              'time': '2021-07-16 18:04:56:429',
-              'price': 6000,
-              'tags': ['transfer']
-            },
-            {
-              'title': '버스비',
-              'desc': '집가는 시외버스 티켓',
-              'time': '2021-07-16 18:21:22:556',
-              'price': 15000,
-              'tags': ['transfer']
-            }
-          ]
-        }
-      ]
+      'paymentListData': {
+        '2021-07-16': [
+          {
+            'title': '점심',
+            'desc': '버거킹 몬스터와퍼 세트',
+            'time': '2021-07-16 17:32:14:223',
+            'price': 9000,
+            'tags': ['food']
+          },
+          {
+            'title': '택시비',
+            'desc': '버스 터미널 가는 택시비',
+            'time': '2021-07-16 18:04:56:429',
+            'price': 6000,
+            'tags': ['transfer']
+          },
+          {
+            'title': '버스비',
+            'desc': '집가는 시외버스 티켓',
+            'time': '2021-07-16 18:21:22:556',
+            'price': 15000,
+            'tags': ['transfer']
+          }
+        ]
+      }
     }
   ]
 };

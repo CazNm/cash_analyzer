@@ -1,8 +1,8 @@
 import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/data/model.dart';
 
 import 'package:cash_analyzer/screens/main/GoalSection.dart';
 import 'package:cash_analyzer/screens/main/PaymentList.dart';
-import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:cash_analyzer/screens/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:cash_analyzer/data/file.dart';
@@ -19,19 +19,18 @@ class MainListViewHome extends StatefulWidget {
 // When use stateful widget in Bloc using project
 class MainListViewHomeState extends State<MainListViewHome> {
   final gData = SessionInfo(
-    300000,
-    150000,
-    40000,
-    DateTime.now().subtract(Duration(days: 15)),
-    DateTime.now().add(Duration(days: 15))
-  );
+      budget: 300000,
+      totalUse: 150000,
+      todayUse: 40000,
+      sDay: DateTime.now().subtract(Duration(days: 15)),
+      dDay: DateTime.now().add(Duration(days: 15)));
 
   final pData = [
-    PaymentInfo(10000, DateTime.now(), "test payment1"),
-    PaymentInfo(21000, DateTime.now(), "test payment2"),
-    PaymentInfo(15000, DateTime.now(), "test payment3"),
-    PaymentInfo(900, DateTime.now(), "test payment4"),
-    PaymentInfo(3100, DateTime.now(), "test payment5"),
+    PaymentInfo(price: 10000, time: DateTime.now(), title: "test payment1"),
+    PaymentInfo(price: 21000, time: DateTime.now(), title: "test payment2"),
+    PaymentInfo(price: 15000, time: DateTime.now(), title: "test payment3"),
+    PaymentInfo(price: 900, time: DateTime.now(), title: "test payment4"),
+    PaymentInfo(price: 3100, time: DateTime.now(), title: "test payment5"),
   ];
 
   @override

@@ -1,20 +1,11 @@
-import 'package:cash_analyzer/app/index.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-class SessionInfo {
-  int budget;
-  int totalUse;
-  int todayUse;
-  DateTime sDay;
-  DateTime dDay;
-
-  SessionInfo(this.budget, this.totalUse, this.todayUse, this.sDay, this.dDay);
-}
+import 'package:flutter/material.dart';
+import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/data/model.dart';
 
 class GoalSection extends StatelessWidget {
   final SessionInfo data;
-  
+
   const GoalSection(this.data, {Key? key}) : super(key: key);
 
   @override

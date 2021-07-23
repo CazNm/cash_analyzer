@@ -1,10 +1,4 @@
-import 'dart:convert';
-
 import 'package:cash_analyzer/utils/time.dart';
-
-List<Map<String, dynamic>> list2Json(List list) {
-  return List.generate(list.length, (index) => list[index].toJson());
-}
 
 class PaymentInfo {
   late String _title;
@@ -13,29 +7,32 @@ class PaymentInfo {
   late int _price;
   late List<String>? _tags;
 
-  PaymentInfo.fromJson(Map<String, dynamic> json) {
-    _title = json['title'];
-    _desc = json['desc'];
-    _time = DateTime.parse(json['time']);
-    _price = json['price'];
-    _tags = json['tags'];
-  }
+  PaymentInfo(
+      {required String title,
+      String? desc,
+      required DateTime time,
+      required int price,
+      List<String>? tags})
+      : _title = title,
+        _desc = desc,
+        _time = time,
+        _price = price,
+        _tags = tags;
 
-  Map<String, dynamic> toJson() {
-    var json = Map<String, dynamic>();
+  PaymentInfo.fromJson(Map<String, dynamic> jsonData)
+      : _title = jsonData['title'],
+        _desc = jsonData['desc'],
+        _time = DateTime.parse(jsonData['time']),
+        _price = jsonData['price'],
+        _tags = jsonData['tags'];
 
-    json['title'] = _title;
-    json['desc'] = _desc;
-    json['time'] = jsonEncode(_time);
-    json['price'] = _price;
-    if (_tags != null) {
-      json['tags'] = list2Json(_tags!);
-    } else {
-      json['tags'] = [];
-    }
-
-    return json;
-  }
+  Map<String, dynamic> toJson() => {
+        'title': _title,
+        'desc': _desc,
+        'time': _time.toIso8601String(),
+        'price': _price,
+        'tags': _tags!,
+      };
 
   String get title => _title;
   String? get desc => _desc;
@@ -44,69 +41,39 @@ class PaymentInfo {
   List<String>? get tags => _tags;
 }
 
-class PaymentListPerDay {
-  late DateTime _currentDate;
-  late List<PaymentInfo> _paymentInfoList;
-
-  PaymentListPerDay.fromJson(Map<String, dynamic> json) {
-    _currentDate = json['date'];
-
-    _paymentInfoList = List<PaymentInfo>.generate(
-        json['paymentInfoList'].length,
-        (index) => PaymentInfo.fromJson(json['paymentInfoList'][index]));
-  }
-
-  Map<String, dynamic> toJson() {
-    var json = Map<String, dynamic>();
-
-    json['date'] = jsonEncode(_currentDate);
-    json['paymentInfoList'] = list2Json(_paymentInfoList);
-
-    return json;
-  }
-
-  DateTime get currentDate => _currentDate;
-  List<PaymentInfo> get paymentInfoList => _paymentInfoList;
-}
-
 class SessionInfo {
   late int budget;
   late int totalUse;
+  late int todayUse;
   late DateTime sDay;
   late DateTime dDay;
 
   SessionInfo(
-      {required int budget,
-      int totalUse = 0,
-      required DateTime sDay,
+      {required this.budget,
+      this.totalUse = 0,
+      this.todayUse = 0,
+      required this.sDay,
       DateTime? dDay}) {
-    budget = budget;
-    totalUse = totalUse;
-    sDay = sDay;
     if (dDay == null) {
-      dDay = DateTime.parse(sDay.toString()).add(Duration(days: 30));
+      dDay = DateTime.parse(sDay.toString()).add(Duration(
+          days: 30)); // TODO: change this value to reference config's value
     } else {
       dDay = dDay;
     }
   }
 
-  SessionInfo.fromJson(Map<String, dynamic> json) {
-    budget = json['budget'];
-    totalUse = json['totalUse'];
-    sDay = DateTime.parse(json['sDay']);
-    dDay = DateTime.parse(json['dDay']);
-  }
+  SessionInfo.fromJson(Map<String, dynamic> jsonData)
+      : budget = jsonData['budget'],
+        totalUse = jsonData['totalUse'],
+        sDay = DateTime.parse(jsonData['sDay']),
+        dDay = DateTime.parse(jsonData['dDay']);
 
-  Map<String, dynamic> toJson() {
-    var json = Map<String, dynamic>();
-
-    json['budget'] = budget;
-    json['totalUse'] = totalUse;
-    json['sDay'] = jsonEncode(sDay);
-    json['dDay'] = jsonEncode(dDay);
-
-    return json;
-  }
+  Map<String, dynamic> toJson() => {
+        'budget': budget,
+        'totalUse': totalUse,
+        'sDay': sDay.toIso8601String(),
+        'dDay': sDay.toIso8601String(),
+      };
 
   bool isContain(DateTime date) {
     return sDay.isBefore(date) && date.isBefore(dDay);
@@ -115,58 +82,53 @@ class SessionInfo {
 
 class SessionData {
   late SessionInfo _sessionInfo;
-  late List<PaymentListPerDay> _paymentListData;
+  late Map<String, List<PaymentInfo>> _paymentListData;
 
-  SessionData(
-      {required SessionInfo sessionInfo,
-      List<PaymentListPerDay>? paymentListData}) {
-    _sessionInfo = sessionInfo;
-    if (paymentListData == null) {
-      _paymentListData = List<PaymentListPerDay>.empty();
-    } else {
-      _paymentListData = paymentListData;
-    }
-  }
+  SessionData(SessionInfo sessionInfo)
+      : _sessionInfo = sessionInfo,
+        _paymentListData = {};
 
-  SessionData.fromJson(Map<String, dynamic> json) {
-    _sessionInfo = SessionInfo.fromJson(json['sessionInfo']);
+  SessionData.fromJson(Map<String, dynamic> jsonData)
+      : _sessionInfo = SessionInfo.fromJson(jsonData['sessionInfo']),
+        _paymentListData = Map.fromIterable(
+          jsonData['paymentListData'],
+          value: (element) => List<PaymentInfo>.generate(
+              element.length, (index) => PaymentInfo.fromJson(element[index])),
+        );
+  // _paymentListData = {};
+  // jsonData['paymentListData'].forEach((key, value) {
+  //   _paymentListData[key] = PaymentListPerDay.fromJson(value);
 
-    _paymentListData = List<PaymentListPerDay>.generate(
-        json['paymentListData'].length,
-        (index) => PaymentListPerDay.fromJson(json['paymentListData'][index]));
-  }
-
-  Map<String, dynamic> toJson() {
-    var json = Map<String, dynamic>();
-
-    json['sessionInfo'] = _sessionInfo.toJson();
-    json['paymentListData'] = list2Json(_paymentListData);
-
-    return json;
-  }
+  Map<String, dynamic> toJson() => {
+        'sessionInfo': _sessionInfo,
+        'paymentListData': _paymentListData,
+      };
 
   SessionInfo get sessionInfo => _sessionInfo;
-  List<PaymentListPerDay> get paymentListData => _paymentListData;
+  Map<String, List<PaymentInfo>> get paymentListData => _paymentListData;
+
+  List<PaymentInfo>? findDate(DateTime date) {
+    DateTime dateOnly = removeTime(date);
+    return _paymentListData[dateOnly.toIso8601String()];
+  }
+
+  void addPayment(PaymentInfo paymentInfo, {DateTime? date}) {
+    if (date != null) {}
+  }
 }
 
 class DataModel {
-  late List<SessionData> _sessionList = List<SessionData>.empty();
+  late List<SessionData> _sessionList;
 
-  DataModel();
+  DataModel() : _sessionList = List<SessionData>.empty();
 
-  DataModel.fromJson(Map<String, dynamic> json) {
-    json['data'].forEach((element) {
-      _sessionList.add(SessionData.fromJson(element));
-    });
-  }
+  DataModel.fromJson(Map<String, dynamic> jsonData)
+      : _sessionList = List<SessionData>.generate(jsonData['data'].length,
+            (index) => SessionData.fromJson(jsonData['data'][index]));
 
-  Map<String, dynamic> toJson() {
-    var json = Map<String, dynamic>();
-
-    json['data'] = list2Json(_sessionList);
-
-    return json;
-  }
+  Map<String, dynamic> toJson() => {
+        'data': _sessionList,
+      };
 
   List<SessionData> get allSessions => _sessionList;
   SessionData get currentSession => _sessionList[0];
@@ -177,19 +139,6 @@ class DataModel {
       SessionData session = _sessionList[i];
       if (session._sessionInfo.isContain(dateOnly.add(Duration(seconds: 1)))) {
         return session;
-      }
-    }
-  }
-
-  PaymentListPerDay? findDate(DateTime date) {
-    SessionData? currentSession = findSession(date);
-    if (currentSession != null) {
-      DateTime dateOnly = removeTime(date);
-      for (var i = 0; i < currentSession._paymentListData.length; i++) {
-        PaymentListPerDay pd = currentSession._paymentListData[i];
-        if (dateOnly.compareTo(pd._currentDate) == 0) {
-          return pd;
-        }
       }
     }
   }

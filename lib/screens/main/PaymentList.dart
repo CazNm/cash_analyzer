@@ -1,4 +1,5 @@
 import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/data/model.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:cash_analyzer/screens/detail/detailView.dart';
 import 'package:flutter/material.dart';

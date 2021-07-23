@@ -1,4 +1,5 @@
 import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/data/model.dart';
 import 'package:cash_analyzer/screens/edit/editView.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +110,7 @@ class _DetailViewState extends State<DetailView> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * (0.15),
+                      height: height * (0.15),
                     )
                   ],
                 ),
