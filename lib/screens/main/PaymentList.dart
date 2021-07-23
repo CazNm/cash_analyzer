@@ -1,15 +1,15 @@
-import 'package:cash_analyzer/app/index.dart';
-import 'package:cash_analyzer/data/model.dart';
-import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
-import 'package:cash_analyzer/screens/detail/detailView.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class PaymentListData {
-  List<PaymentInfo> paymentInfoList;
-  DateTime currentDate;
+import 'package:cash_analyzer/app/index.dart';
 
-  PaymentListData(this.paymentInfoList, this.currentDate);
+import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
+import 'package:cash_analyzer/screens/detail/detailView.dart';
+
+class PaymentListData {
+  DateTime currentDate;
+  List<PaymentInfo> paymentInfoList;
+
+  PaymentListData(this.currentDate, this.paymentInfoList);
 }
 
 class PaymentList extends StatelessWidget {
@@ -22,7 +22,7 @@ class PaymentList extends StatelessWidget {
     return GestureDetector(
       onTap: () => service!.navigateTo(
         DetailView.routeName,
-        arguments: DetailViewPageArguments(data.paymentInfoList, data.currentDate),
+        arguments: DetailViewPageArguments(data.currentDate),
       ),
       child: Container(
         width: 200,

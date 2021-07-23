@@ -1,16 +1,20 @@
+import 'package:cash_analyzer/data/data.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
 export 'package:flutter/material.dart';
 export 'style.dart';
 export 'router.dart';
 export 'dart:async';
 export 'dart:convert';
-
-import 'package:flutter/material.dart';
-
-import 'package:get_it/get_it.dart';
+export 'package:cash_analyzer/data/model.dart';
+export 'package:cash_analyzer/app/DataProcessBloc.dart';
+export 'package:cash_analyzer/app/blocProvider.dart';
 
 // GetIt manage factory fuctions and singletons witch is globaly, frequently used?
 GetIt locator = GetIt.instance;
-NavigationService? service; // it use gps??
+NavigationService? service;
+late DataRepository repo;
 
 BuildContext? context = service!.navigatorKey.currentContext;
 
@@ -35,4 +39,7 @@ class NavigationService {
 void setupLocator() {
   locator.registerLazySingleton(() => NavigationService());
   service = locator<NavigationService>();
+
+  locator.registerLazySingleton(() => DataRepository());
+  repo = locator<DataRepository>();
 }

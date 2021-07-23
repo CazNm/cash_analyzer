@@ -54,6 +54,13 @@ Future<File> get _localFile async {
   return File('$path/analysData.txt');
 }
 
+Future<Map<String, dynamic>> createFile() async {
+  final file = await _localFile;
+  file.create();
+  file.writeAsString(jsonEncode({'data': []}));
+  return {'data': []};
+}
+
 Future<Map<String, dynamic>?> loadLocalData() async {
   try {
     final file = await _localFile;
@@ -63,11 +70,12 @@ Future<Map<String, dynamic>?> loadLocalData() async {
 
     final _data = jsonDecode(contents);
 
-    print(_data);
     return _data;
   } catch (e) {
-    // 에러가 발생할 경우 null을 반환.
-    print("error in loadLocalData");
+    print("error in loadLocalData=============");
+    print(e);
+    print("===================================");
+    return null;
   }
 }
 
@@ -80,7 +88,7 @@ Future<File?> saveLocalDataFromParsedJson(Map<String, dynamic> data) async {
     return file.writeAsString(jsonEncode(data), flush: true);
   } catch (e) {
     print("error in saveLocalDataFromParsedJson");
-    }
+  }
 }
 
 Future<File?> saveLocalDataFromObject(Object data) async {
@@ -92,7 +100,7 @@ Future<File?> saveLocalDataFromObject(Object data) async {
     return file.writeAsString(jsonEncode(data), flush: true);
   } catch (e) {
     print("error in saveLocalDataFromObject");
-    }
+  }
 }
 
 //jsonData 형식

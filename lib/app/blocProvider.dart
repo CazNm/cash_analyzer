@@ -16,7 +16,8 @@ class BlocProvider<T extends Bloc> extends InheritedWidget {
   // what's different?
   // BlocProvider({required Key key, required Widget child, required this.bloc})
   //     : super(key: key, child: child);
-  BlocProvider({required Key key, required Widget child, required T bloc})
+  // Key is important?
+  BlocProvider({Key? key, required Widget child, required T bloc})
       : this.bloc = bloc,
         super(key: key, child: child);
 
@@ -27,7 +28,7 @@ class BlocProvider<T extends Bloc> extends InheritedWidget {
     return true;
   }
 
-  static BlocProvider? of(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType<BlocProvider>());
+  static BlocProvider<T>? of<T extends Bloc>(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<BlocProvider<T>>();
   }
 }

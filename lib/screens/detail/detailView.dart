@@ -1,14 +1,12 @@
 import 'package:cash_analyzer/app/index.dart';
-import 'package:cash_analyzer/data/model.dart';
+
 import 'package:cash_analyzer/screens/edit/editView.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
-import 'package:flutter/material.dart';
 
 class DetailViewPageArguments extends Object {
-  final List<PaymentInfo> paymentList;
   final DateTime date;
 
-  DetailViewPageArguments(this.paymentList, this.date);
+  DetailViewPageArguments(this.date);
 }
 
 class DetailView extends StatefulWidget {
@@ -47,86 +45,100 @@ class _DetailViewState extends State<DetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final data = this.widget.args;
+    final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
 
-    int use = 0;
-    data.paymentList.forEach((element) {
-      use += element.price;
-    });
+    bloc.fetchPaymentList(this.widget.args.date);
+
 
     return SafeArea(
       child: Scaffold(
-          backgroundColor: black48,
-          body: Stack(
+        backgroundColor: black48,
+        body: StreamBuilder<List<PaymentInfo>>(
+            stream: null,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return buildBody(context, snapshot.data!);
+              } else if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            }),
+      ),
+    );
+  }
+
+  Widget buildBody(BuildContext context, List<PaymentInfo> data) {
+    int use = 0;
+    data.forEach((element) {
+      use += element.price;
+    });
+
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.fromLTRB(48, 60, 48, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(48, 60, 48, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${data.date.toString()} 사용 내역",
-                      style: whiteText(size: 22, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 6),
-                    Text(
-                      "총 : $use",
-                      style: whiteText(size: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 50),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: salmon,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: ListView.builder(
-                            itemCount: data.paymentList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: PaymentSummaryTile(
-                                        data.paymentList[index],
-                                        detail: true)
-                                    .build(context),
-                              );
-                            }
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.bottomLeft,
-                      child: IconButton(
-                        onPressed: () => service!.navigateTo(
-                          EditView.routeName,
-                          arguments: EditViewPageArguments(data.date)
-                        ),
-                        icon: Icon(Icons.add, color: white),
-                        iconSize: 40,
-                      ),
-                    ),
-                    SizedBox(
-                      height: height * (0.15),
-                    )
-                  ],
+              Text(
+                "${this.widget.args.date.toString()} 사용 내역",
+                style: whiteText(size: 22, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 6),
+              Text(
+                "총 : $use",
+                style: whiteText(size: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 50),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: salmon,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: PaymentSummaryTile(data[index],
+                                    detail: true)
+                                .build(context),
+                          );
+                        }),
+                  ),
                 ),
               ),
-              Positioned(
-                top: 0,
-                left: 0,
+              Container(
+                alignment: Alignment.bottomLeft,
                 child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.cancel, color: white),
+                  onPressed: () => service!.navigateTo(EditView.routeName,
+                      arguments: EditViewPageArguments(this.widget.args.date)),
+                  icon: Icon(Icons.add, color: white),
+                  iconSize: 40,
                 ),
+              ),
+              SizedBox(
+                height: height * (0.15),
               )
             ],
-          )),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.cancel, color: white),
+          ),
+        )
+      ],
     );
   }
 }

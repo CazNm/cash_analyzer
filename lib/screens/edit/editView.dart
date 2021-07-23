@@ -1,5 +1,4 @@
 import 'package:cash_analyzer/app/index.dart';
-import 'package:flutter/material.dart';
 
 class EditViewPageArguments extends Object {
   final DateTime date;
