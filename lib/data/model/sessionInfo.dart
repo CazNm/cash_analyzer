@@ -1,55 +1,57 @@
 class SessionInfo {
-  late int budget;
-  late int totalUse;
-  late DateTime sDay;
-  late DateTime dDay;
+  late int _budget;
+  late int _totalUse;
+  late DateTime _sDay;
+  late DateTime _dDay;
+  late bool _editable;
 
   SessionInfo(
-      {required this.budget,
-      this.totalUse = 0,
-      required this.sDay,
-      DateTime? dDay}) {
+      {required budget,
+      totalUse = 0,
+      required sDay,
+      DateTime? dDay}) : _budget = budget,
+      _totalUse = totalUse,
+      _sDay = sDay,
+      _editable = true {
     if (dDay == null) {
-      dDay = DateTime.parse(sDay.toString()).add(Duration(
-          days: 30)); // TODO: change this value to reference config's value
+      _dDay = DateTime.parse('${sDay.year}-${sDay.month + 1}-${sDay.day}')
+          .subtract(Duration(
+              days: 1)); // TODO: change this value to reference config's value
     } else {
-      dDay = dDay;
+      _dDay = dDay;
     }
   }
 
-  SessionInfo.from(SessionInfo si,
-      {int? budget,
-      int? totalUse,
-      DateTime? sDay,
-      DateTime? dDay}) {
-    this.budget = budget != null ? budget : si.budget;
-    this.totalUse = totalUse != null ? totalUse : si.totalUse;
-    this.sDay = sDay != null ? sDay : si.sDay;
-    this.dDay = dDay != null ? dDay : si.dDay;
-  }
-
   SessionInfo.fromJson(Map<String, dynamic> jsonData)
-      : budget = jsonData['budget'],
-        totalUse = jsonData['totalUse'],
-        sDay = DateTime.parse(jsonData['sDay']),
-        dDay = DateTime.parse(jsonData['dDay']);
+      : _budget = jsonData['budget'],
+        _totalUse = jsonData['totalUse'],
+        _sDay = DateTime.parse(jsonData['sDay']),
+        _dDay = DateTime.parse(jsonData['dDay']),
+        _editable = jsonData['editable'];
 
   Map<String, dynamic> toJson() => {
         'budget': budget,
         'totalUse': totalUse,
         'sDay': sDay.toIso8601String(),
         'dDay': sDay.toIso8601String(),
+        'editable': editable,
       };
 
-  void copyValue(SessionInfo si) {
-    this.budget = si.budget;
-    this.totalUse = si.totalUse;
-    this.sDay = si.sDay;
-    this.dDay = si.dDay;
+  int get budget => _budget;
+  int get totalUse => _totalUse;
+  DateTime get sDay => _sDay;
+  DateTime get dDay => _dDay;
+  bool get editable => _editable;
+
+  set budget(int budget) {
+    if (_editable) {
+      _budget = budget;
+      _editable = false;
+    }
   }
 
   void addTotalUse(int value) {
-    this.totalUse += value;
+    _totalUse += value;
   }
 
   bool isContain(DateTime date) {

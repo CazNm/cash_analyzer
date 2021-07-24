@@ -2,23 +2,24 @@ import 'package:cash_analyzer/app/index.dart';
 
 import 'package:cash_analyzer/screens/main/GoalSection.dart';
 import 'package:cash_analyzer/screens/main/PaymentList.dart';
-import 'package:cash_analyzer/screens/setting/setting.dart';
+import 'package:cash_analyzer/screens/setting/settingPage.dart';
 import 'package:cash_analyzer/utils/time.dart';
 
-class MainListViewHome extends StatefulWidget {
+class MainPage extends StatefulWidget {
   static const routeName = '/';
 
   @override
   State<StatefulWidget> createState() {
-    return MainListViewHomeState();
+    return MainPageState();
   }
 }
 
 // When use stateful widget in Bloc using project
-class MainListViewHomeState extends State<MainListViewHome> {
+class MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    Future.microtask(() => bloc.fetchSessionData());
   }
 
   @override
@@ -29,10 +30,10 @@ class MainListViewHomeState extends State<MainListViewHome> {
   @override
   Widget build(BuildContext context) {
     // final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
-    Future.microtask(() => bloc.fetchSessionData());
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: black48,
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
@@ -80,7 +81,8 @@ class MainListViewHomeState extends State<MainListViewHome> {
                 SizedBox(height: 40),
                 GoalSection(si, todayUse),
               ],
-            )),
+            )
+          ),
         Expanded(
           flex: 65,
           child: Container(

@@ -11,26 +11,28 @@ class DataRepository {
     loadData();
   }
 
-  Future<DataModel?> loadData() async {
-    _whileLoading = true;
+  Future<DataModel> loadData() async {
+    if (!_isLoaded) {
+      _whileLoading = true;
 
-    // Map<String, dynamic>? parsedJson = await loadLocalData();
-    // if (parsedJson != null) {
-    //   // _data = DataModel.fromJson(parsedJson);
-    //   _data = DataModel.fromJson(await createFile());
-    // } else {
-    //   _data = DataModel.fromJson(await createFile());
-    // }
+      // Map<String, dynamic>? parsedJson = await loadLocalData();
+      // if (parsedJson != null) {
+      //   // _data = DataModel.fromJson(parsedJson);
+      //   _data = DataModel.fromJson(await createFile());
+      // } else {
+      //   _data = DataModel.fromJson(await createFile());
+      // }
 
-    _data = DataModel.fromJson(saveDataList);
-    
-    if (_data.currentSession.findDate(DateTime.now()) == null) {
-      _data.currentSession
-          .paymentListData[removeTime(DateTime.now()).toIso8601String()] = <PaymentInfo>[];
+      _data = DataModel.fromJson(saveDataList);
+      
+      if (_data.currentSession.findDate(DateTime.now()) == null) {
+        _data.currentSession
+            .paymentListData[removeTime(DateTime.now()).toIso8601String()] = <PaymentInfo>[];
+      }
+
+      _isLoaded = true;
+      _whileLoading = false;
     }
-
-    _isLoaded = true;
-    _whileLoading = false;
     return _data;
   }
 

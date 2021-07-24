@@ -45,6 +45,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => DataRepository());
   repo = locator<DataRepository>();
   
-  // locator.registerLazySingleton(() => DataProcessBloc());
-  // bloc = locator<DataProcessBloc>();
+  locator.registerLazySingleton(() => DataProcessBloc());
+  bloc = locator<DataProcessBloc>();
 }

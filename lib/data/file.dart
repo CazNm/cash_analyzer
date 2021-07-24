@@ -6,14 +6,16 @@ import 'package:path_provider/path_provider.dart';
 // flutter 2.13.0 or above
 // typedef Json = Map<String, dynamic>;
 
+// TODO: add setting data
 Map<String, dynamic> saveDataList = {
   'data': [
     {
       'sessionInfo': {
         'budget': 300000,
         'totalUse': 30000,
-        'sDay': '2021-07-02T00:00:00.000',
-        'dDay': '2021-08-01T00:00:00.000'
+        'sDay': '2021-07-01T00:00:00.000',
+        'dDay': '2021-07-31T00:00:00.000',
+        'editable': true,
       },
       'paymentListData': {
         '2021-07-16T00:00:00.000': [
@@ -42,10 +44,11 @@ Map<String, dynamic> saveDataList = {
       }
     }
   ],
-  // TODO: add setting data
-  // 'setting' {
-  //   ''
-  // },
+  'settings': {
+    'notice': false,
+    'theme': 'salmon', // salmon or lightBlue
+    'nextBudget': 300000,
+  },
 };
 
 Future<String> get _localPath async {
@@ -107,12 +110,3 @@ Future<File?> saveLocalDataFromObject(Object data) async {
     print("error in saveLocalDataFromObject");
   }
 }
-
-//jsonData 형식
-//{
-//   "data" :
-// [
-//   {}
-// ]
-// 데이터 리스트에 Json 형식으로 고정하는 형태
-//}

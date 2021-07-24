@@ -2,30 +2,35 @@ import 'package:intl/intl.dart';
 
 import 'package:cash_analyzer/app/index.dart';
 
-import 'package:cash_analyzer/screens/edit/editView.dart';
+import 'package:cash_analyzer/screens/edit/editPage.dart';
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
 
-class DetailViewPageArguments extends Object {
+class DetailPageArguments extends Object {
   final DateTime date;
 
-  DetailViewPageArguments(this.date);
+  DetailPageArguments(this.date);
 }
 
-class DetailView extends StatefulWidget {
+class DetailPage extends StatefulWidget {
   static const routeName = '/detail';
 
-  final DetailViewPageArguments args;
+  final DetailPageArguments args;
 
-  DetailView({required this.args});
+  DetailPage({required this.args});
 
   @override
-  _DetailViewState createState() => _DetailViewState();
+  _DetailPageState createState() => _DetailPageState();
 }
 
-class _DetailViewState extends State<DetailView> {
+class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
+    Future.microtask(() {
+      print('_DetailPageState.build microtask start');
+      bloc.fetchPaymentList(this.widget.args.date);
+    });
+
   }
 
   @override
@@ -36,11 +41,6 @@ class _DetailViewState extends State<DetailView> {
   @override
   Widget build(BuildContext context) {
     // final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
-    Future.microtask(() {
-      print('_DetailViewState.build microtask start');
-      bloc.fetchPaymentList(this.widget.args.date);
-    });
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: black48,
@@ -111,8 +111,8 @@ class _DetailViewState extends State<DetailView> {
               dateString == "오늘의" ? Container(
                 alignment: Alignment.bottomLeft,
                 child: IconButton(
-                  onPressed: () => service!.navigateTo(EditView.routeName,
-                      arguments: EditViewPageArguments(this.widget.args.date)),
+                  onPressed: () => service!.navigateTo(EditPage.routeName,
+                      arguments: EditPageArguments(this.widget.args.date)),
                   icon: Icon(Icons.add, color: white),
                   iconSize: 40,
                 ),

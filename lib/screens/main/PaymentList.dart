@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:cash_analyzer/app/index.dart';
 
 import 'package:cash_analyzer/screens/main/PaymentSummary.dart';
-import 'package:cash_analyzer/screens/detail/detailView.dart';
+import 'package:cash_analyzer/screens/detail/detailPage.dart';
 
 class PaymentListData {
   DateTime currentDate;
@@ -21,8 +21,8 @@ class PaymentList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => service!.navigateTo(
-        DetailView.routeName,
-        arguments: DetailViewPageArguments(data.currentDate),
+        DetailPage.routeName,
+        arguments: DetailPageArguments(data.currentDate),
       ),
       child: Container(
         width: 200,

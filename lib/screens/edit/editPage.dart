@@ -1,24 +1,24 @@
 import 'package:cash_analyzer/app/index.dart';
 import 'package:cash_analyzer/utils/time.dart';
 
-class EditViewPageArguments extends Object {
+class EditPageArguments extends Object {
   final DateTime date;
 
-  EditViewPageArguments(this.date);
+  EditPageArguments(this.date);
 }
 
-class EditView extends StatefulWidget {
+class EditPage extends StatefulWidget {
   static const routeName = '/edit';
 
-  final EditViewPageArguments args;
+  final EditPageArguments args;
 
-  const EditView({required this.args, Key? key}) : super(key: key);
+  const EditPage({required this.args, Key? key}) : super(key: key);
 
   @override
-  _EditViewState createState() => _EditViewState();
+  _EditPageState createState() => _EditPageState();
 }
 
-class _EditViewState extends State<EditView> {
+class _EditPageState extends State<EditPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _controller = TextEditingController();
 
