@@ -124,6 +124,7 @@ class _EditViewState extends State<EditView> {
                             title: title,
                             time: currentDate,
                             price: price.toInt()));
+                        bloc.editTotalUseOfCurrentSession(price.toInt());
                         Navigator.pop(context);
                       }
                     },

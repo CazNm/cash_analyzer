@@ -66,6 +66,16 @@ class DataProcessBloc extends Bloc {
     return false;
   }
 
+  Future<bool> editTotalUseOfCurrentSession(int value) async {
+    repo.data!.currentSession.sessionInfo.addTotalUse(value);
+    if (await repo.saveData()) {
+      _sessionInfoController.add(repo.data!.currentSession.sessionInfo);
+      return true;
+    }
+
+    return false;
+  }
+
   Future<bool> addPayment(PaymentInfo paymentInfo) async {
     DateTime currentDate = paymentInfo.time;
     List<PaymentInfo>? paymentList =
@@ -86,7 +96,11 @@ class DataProcessBloc extends Bloc {
     List<PaymentInfo>? paymentList =
         repo.data!.findSession(currentDate)!.findDate(currentDate);
     if (paymentList != null) {
-      paymentList.removeWhere((element) => element.time == currentDate);
+      paymentList.removeWhere((element) =>
+          element.time == paymentInfo.time &&
+          element.title == paymentInfo.title &&
+          element.price == paymentInfo.price);
+      repo.data!.currentSession.sessionInfo.addTotalUse(-paymentInfo.price);
       if (await repo.saveData()) {
         _paymentsController.add(paymentList);
         return true;

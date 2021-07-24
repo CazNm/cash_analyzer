@@ -48,6 +48,10 @@ class SessionInfo {
     this.dDay = si.dDay;
   }
 
+  void addTotalUse(int value) {
+    this.totalUse += value;
+  }
+
   bool isContain(DateTime date) {
     return sDay.isBefore(date) && date.isBefore(dDay);
   }
