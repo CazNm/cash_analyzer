@@ -76,11 +76,12 @@ class _EditPageState extends State<EditPage> {
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return '비워둘 수 없습니다!';
+                    } else if (int.tryParse(value) == null) {
+                      return '숫자여야 합니다!';
                     }
                     return null;
                   },
                   onChanged: (newValue) {
-                    print("1");
                     setState(() {
                       price = double.parse(newValue);
                     });

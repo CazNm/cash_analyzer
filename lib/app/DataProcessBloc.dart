@@ -60,21 +60,21 @@ class DataProcessBloc extends Bloc {
     }
   }
 
-  Future<bool> edit(bool value) async {
+  Future<bool> toggleTheme(String value) async {
     final data = await repo.loadData();
-    data.settings.notice = value;
+    data.settings.theme = value;
     if (await repo.saveData()) {
-      _settingController.add(data.settings);
       return true;
     } else {
       return false;
     }
   }
 
-  Future<bool> toggleTheme(String value) async {
+  Future<bool> editNextBudget(int value) async {
     final data = await repo.loadData();
-    data.settings.theme = value;
+    data.settings.nextBudget = value;
     if (await repo.saveData()) {
+      _settingController.add(data.settings);
       return true;
     } else {
       return false;

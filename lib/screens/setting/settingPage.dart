@@ -10,9 +10,9 @@ class SettingPage extends StatefulWidget {
 }
 
 class SettingPageState extends State<SettingPage> {
-  // bool themeValue = false;
   WhiteCheckCircle _salmon = WhiteCheckCircle(checkValue: true);
   WhiteCheckCircle _lightBlue = WhiteCheckCircle(checkValue: false);
+  TextEditingController _cont = TextEditingController();
 
   @override
   void initState() {
@@ -55,6 +55,8 @@ class SettingPageState extends State<SettingPage> {
               colorOption(settings),
               SizedBox(height: 30),
               noticeOption(settings),
+              SizedBox(height: 30),
+              budgetOption(settings, _cont),
             ],
           ),
         ),
@@ -131,6 +133,33 @@ class SettingPageState extends State<SettingPage> {
             Text("yes", style: whiteText()),
           ],
         )
+      ],
+    );
+  }
+
+  Widget budgetOption(Settings settings, TextEditingController controller) {
+    controller.value =
+        controller.value.copyWith(text: settings.nextBudget.toString());
+    return Column(
+      children: [
+        Text("Next budget",
+            style: whiteText(size: 20, fontWeight: FontWeight.bold)),
+        TextFormField(
+          style: whiteText(size: 20, fontWeight: FontWeight.bold),
+          controller: controller,
+          keyboardType: TextInputType.number,
+          validator: (String? value) {
+            if (value == null || value.isEmpty) {
+              return '비워둘 수 없습니다!';
+            } else if (int.tryParse(value) == null) {
+              return '숫자여야 합니다!';
+            }
+            return null;
+          },
+          onEditingComplete: () {
+            bloc.editNextBudget(int.parse(controller.value.text));
+          },
+        ),
       ],
     );
   }
