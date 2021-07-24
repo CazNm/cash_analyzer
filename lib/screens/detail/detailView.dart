@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'package:cash_analyzer/app/index.dart';
 
 import 'package:cash_analyzer/screens/edit/editView.dart';
@@ -21,18 +23,6 @@ class DetailView extends StatefulWidget {
 }
 
 class _DetailViewState extends State<DetailView> {
-  // final paymentList = [
-  //   PaymentInfo(10000, DateTime.now(), "test payment1"),
-  //   PaymentInfo(21000, DateTime.now(), "test payment2"),
-  //   PaymentInfo(15000, DateTime.now(), "test payment3"),
-  //   PaymentInfo(900, DateTime.now(), "test payment4"),
-  //   PaymentInfo(3100, DateTime.now(), "test payment5"),
-  // ];
-
-  // final date = DateTime.now();
-
-  // final use = 40000;
-
   @override
   void initState() {
     super.initState();
@@ -45,16 +35,17 @@ class _DetailViewState extends State<DetailView> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
-
-    bloc.fetchPaymentList(this.widget.args.date);
-
+    // final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
+    Future.microtask(() {
+      print('_DetailViewState.build microtask start');
+      bloc.fetchPaymentList(this.widget.args.date);
+    });
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: black48,
         body: StreamBuilder<List<PaymentInfo>>(
-            stream: null,
+            stream: bloc.paymentStream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return buildBody(context, snapshot.data!);
@@ -74,6 +65,11 @@ class _DetailViewState extends State<DetailView> {
       use += element.price;
     });
 
+    String dateString = DateFormat("MM-dd").format(this.widget.args.date);
+    if (dateString == DateFormat("MM-dd").format(DateTime.now())) {
+      dateString = "오늘의";
+    }
+
     return Stack(
       children: [
         Container(
@@ -82,7 +78,7 @@ class _DetailViewState extends State<DetailView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${this.widget.args.date.toString()} 사용 내역",
+                "$dateString 사용 내역",
                 style: whiteText(size: 22, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 6),
@@ -105,15 +101,14 @@ class _DetailViewState extends State<DetailView> {
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: PaymentSummaryTile(data[index],
-                                    detail: true)
+                            child: PaymentSummaryTile(data[index], detail: true)
                                 .build(context),
                           );
                         }),
                   ),
                 ),
               ),
-              Container(
+              dateString == "오늘의" ? Container(
                 alignment: Alignment.bottomLeft,
                 child: IconButton(
                   onPressed: () => service!.navigateTo(EditView.routeName,
@@ -121,7 +116,7 @@ class _DetailViewState extends State<DetailView> {
                   icon: Icon(Icons.add, color: white),
                   iconSize: 40,
                 ),
-              ),
+              ) : Container(),
               SizedBox(
                 height: height * (0.15),
               )
@@ -133,6 +128,7 @@ class _DetailViewState extends State<DetailView> {
           left: 0,
           child: IconButton(
             onPressed: () {
+              bloc.fetchSessionData();
               Navigator.pop(context);
             },
             icon: Icon(Icons.cancel, color: white),

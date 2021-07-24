@@ -1,14 +1,12 @@
 class SessionInfo {
   late int budget;
   late int totalUse;
-  late int todayUse;
   late DateTime sDay;
   late DateTime dDay;
 
   SessionInfo(
       {required this.budget,
       this.totalUse = 0,
-      this.todayUse = 0,
       required this.sDay,
       DateTime? dDay}) {
     if (dDay == null) {
@@ -22,12 +20,10 @@ class SessionInfo {
   SessionInfo.from(SessionInfo si,
       {int? budget,
       int? totalUse,
-      int? todayUse,
       DateTime? sDay,
       DateTime? dDay}) {
     this.budget = budget != null ? budget : si.budget;
     this.totalUse = totalUse != null ? totalUse : si.totalUse;
-    this.todayUse = todayUse != null ? todayUse : si.todayUse;
     this.sDay = sDay != null ? sDay : si.sDay;
     this.dDay = dDay != null ? dDay : si.dDay;
   }
@@ -48,7 +44,6 @@ class SessionInfo {
   void copyValue(SessionInfo si) {
     this.budget = si.budget;
     this.totalUse = si.totalUse;
-    this.todayUse = si.todayUse;
     this.sDay = si.sDay;
     this.dDay = si.dDay;
   }

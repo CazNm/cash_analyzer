@@ -3,6 +3,7 @@ import 'package:cash_analyzer/app/index.dart';
 import 'package:cash_analyzer/screens/main/GoalSection.dart';
 import 'package:cash_analyzer/screens/main/PaymentList.dart';
 import 'package:cash_analyzer/screens/setting/setting.dart';
+import 'package:cash_analyzer/utils/time.dart';
 
 class MainListViewHome extends StatefulWidget {
   static const routeName = '/';
@@ -27,8 +28,8 @@ class MainListViewHomeState extends State<MainListViewHome> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
-    bloc.fetchSessionData();
+    // final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
+    Future.microtask(() => bloc.fetchSessionData());
 
     return SafeArea(
       child: Scaffold(
@@ -61,6 +62,14 @@ class MainListViewHomeState extends State<MainListViewHome> {
   Widget buildBody(SessionData data) {
     SessionInfo si = data.sessionInfo;
     List<String> keys = data.paymentListData.keys.toList();
+    int todayUse = 0;
+    List<PaymentInfo>? paymentInfoList =
+        data.paymentListData[removeTime(DateTime.now()).toIso8601String()];
+    if (paymentInfoList != null) {
+      paymentInfoList.forEach((element) {
+        todayUse += element.price;
+      });
+    }
 
     return Column(
       children: [
@@ -69,7 +78,7 @@ class MainListViewHomeState extends State<MainListViewHome> {
             child: Column(
               children: [
                 SizedBox(height: 40),
-                GoalSection(si),
+                GoalSection(si, todayUse),
               ],
             )),
         Expanded(
@@ -82,9 +91,9 @@ class MainListViewHomeState extends State<MainListViewHome> {
               width: width,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 2,
+                itemCount: keys.length,
                 itemBuilder: (BuildContext context, int index) {
-                  String key = keys[index];
+                  String key = keys[keys.length-1-index];
                   return Container(
                       margin: EdgeInsets.only(right: index != 1 ? 18 : 0),
                       // child: PaymentList(PaymentListData(

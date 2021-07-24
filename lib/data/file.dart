@@ -12,36 +12,40 @@ Map<String, dynamic> saveDataList = {
       'sessionInfo': {
         'budget': 300000,
         'totalUse': 30000,
-        'sDay': '2021-07-02',
-        'dDay': '2021-08-01'
+        'sDay': '2021-07-02T00:00:00.000',
+        'dDay': '2021-08-01T00:00:00.000'
       },
       'paymentListData': {
-        '2021-07-16': [
+        '2021-07-16T00:00:00.000': [
           {
             'title': '점심',
             'desc': '버거킹 몬스터와퍼 세트',
-            'time': '2021-07-16 17:32:14:223',
+            'time': '2021-07-16T17:32:14.223',
             'price': 9000,
             'tags': ['food']
           },
           {
             'title': '택시비',
             'desc': '버스 터미널 가는 택시비',
-            'time': '2021-07-16 18:04:56:429',
+            'time': '2021-07-16T18:04:56.429',
             'price': 6000,
             'tags': ['transfer']
           },
           {
             'title': '버스비',
             'desc': '집가는 시외버스 티켓',
-            'time': '2021-07-16 18:21:22:556',
+            'time': '2021-07-16T18:21:22.556',
             'price': 15000,
             'tags': ['transfer']
           }
         ]
       }
     }
-  ]
+  ],
+  // TODO: add setting data
+  // 'setting' {
+  //   ''
+  // },
 };
 
 Future<String> get _localPath async {
@@ -57,8 +61,8 @@ Future<File> get _localFile async {
 Future<Map<String, dynamic>> createFile() async {
   final file = await _localFile;
   file.create();
-  file.writeAsString(jsonEncode({'data': []}));
-  return {'data': []};
+  file.writeAsString(jsonEncode(saveDataList));
+  return saveDataList;
 }
 
 Future<Map<String, dynamic>?> loadLocalData() async {
@@ -71,9 +75,10 @@ Future<Map<String, dynamic>?> loadLocalData() async {
     final _data = jsonDecode(contents);
 
     return _data;
-  } catch (e) {
+  } catch (e, s) {
     print("error in loadLocalData=============");
     print(e);
+    print(s);
     print("===================================");
     return null;
   }

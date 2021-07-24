@@ -5,8 +5,9 @@ import 'package:cash_analyzer/data/model.dart';
 
 class GoalSection extends StatelessWidget {
   final SessionInfo data;
+  final int todayUse;
 
-  const GoalSection(this.data, {Key? key}) : super(key: key);
+  const GoalSection(this.data, this.todayUse, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class GoalSection extends StatelessWidget {
                   style: whiteText(size: 12),
                 ),
                 SizedBox(height: 30),
-                Text("오늘 사용한 금액 : ${data.todayUse}원",
+                Text("오늘 사용한 금액 : $todayUse원",
                     style: whiteText(size: 22)),
               ],
             ),

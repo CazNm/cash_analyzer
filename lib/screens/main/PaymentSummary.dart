@@ -9,7 +9,7 @@ class PaymentSummaryTile {
   PaymentSummaryTile(this.info, {this.detail = false});
 
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
+    // final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
 
     return Container(
         padding: EdgeInsets.only(bottom: 7),

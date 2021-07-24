@@ -16,17 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Color.fromRGBO(0, 0, 0, 0.5)));
-    return BlocProvider<DataProcessBloc>(
-        bloc: DataProcessBloc(),
-          child: MaterialApp(
-        theme: ThemeData(
-          accentColor: white,
-        ),
-        title: 'Flutter Demo',
-        onGenerateRoute: router.generateRoute,
-        home: MainListViewHome(),
-        navigatorKey: service!.navigatorKey,
+    return MaterialApp(
+      theme: ThemeData(
+        accentColor: white,
       ),
+      title: 'Flutter Demo',
+      onGenerateRoute: router.generateRoute,
+      home: MainListViewHome(),
+      navigatorKey: service!.navigatorKey,
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cash_analyzer/app/DataProcessBloc.dart';
 import 'package:cash_analyzer/data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -15,6 +16,7 @@ export 'package:cash_analyzer/app/blocProvider.dart';
 GetIt locator = GetIt.instance;
 NavigationService? service;
 late DataRepository repo;
+DataProcessBloc bloc = DataProcessBloc();
 
 BuildContext? context = service!.navigatorKey.currentContext;
 
@@ -42,4 +44,7 @@ void setupLocator() {
 
   locator.registerLazySingleton(() => DataRepository());
   repo = locator<DataRepository>();
+  
+  // locator.registerLazySingleton(() => DataProcessBloc());
+  // bloc = locator<DataProcessBloc>();
 }

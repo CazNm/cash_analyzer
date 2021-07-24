@@ -28,8 +28,10 @@ class DataProcessBloc extends Bloc {
     final data = repo.data;
     if (data != null) {
       _sessionDataController.add(data.currentSession);
+      print("fetchSessionData success");
     } else {
-      _sessionDataController.addError("error in fetchSessionData: data is null");
+      _sessionDataController
+          .addError("error in fetchSessionData: data is null");
     }
   }
 
@@ -37,8 +39,10 @@ class DataProcessBloc extends Bloc {
     List<PaymentInfo>? list = repo.data!.findSession(date)!.findDate(date);
     if (list != null) {
       _paymentsController.add(list);
+      print("fetchPaymentList success");
     } else {
-      _paymentsController.addError("error in fetchPaymentList: cannot found current date");
+      _paymentsController
+          .addError("error in fetchPaymentList: cannot found current date");
     }
   }
 

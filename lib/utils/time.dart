@@ -1,6 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 DateTime removeTime(DateTime date) {
-  String formattedDate = DateFormat("yyyy-MM-dd").format(date);
-  return DateTime.parse(formattedDate);
+  return DateTime.parse(DateFormat("yyyy-MM-dd").format(date));
+}
+
+DateTime changeTime(DateTime date, TimeOfDay time) {
+  return removeTime(date).add(Duration(hours: time.hour, minutes: time.minute));
 }

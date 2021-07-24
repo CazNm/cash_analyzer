@@ -10,15 +10,19 @@ class SessionData {
         _paymentListData = {};
 
   SessionData.fromJson(Map<String, dynamic> jsonData)
-      : _sessionInfo = SessionInfo.fromJson(jsonData['sessionInfo']),
-        _paymentListData = Map.fromIterable(
-          jsonData['paymentListData'],
-          value: (element) => List<PaymentInfo>.generate(
-              element.length, (index) => PaymentInfo.fromJson(element[index])),
-        );
-  // _paymentListData = {};
-  // jsonData['paymentListData'].forEach((key, value) {
-  //   _paymentListData[key] = PaymentListPerDay.fromJson(value);
+      : _sessionInfo = SessionInfo.fromJson(jsonData['sessionInfo'])
+  // _paymentListData = Map.fromIterable(
+  //   jsonData['paymentListData'].,
+  //   value: (element) => List<PaymentInfo>.generate(
+  //       element.length, (index) => PaymentInfo.fromJson(element[index])),
+  // )
+  {
+    _paymentListData = {};
+    jsonData['paymentListData'].forEach((key, value) {
+      _paymentListData[key] = List<PaymentInfo>.generate(
+          value.length, (index) => PaymentInfo.fromJson(value[index]));
+    });
+  }
 
   Map<String, dynamic> toJson() => {
         'sessionInfo': _sessionInfo,

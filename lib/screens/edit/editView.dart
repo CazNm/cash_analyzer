@@ -1,4 +1,5 @@
 import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/utils/time.dart';
 
 class EditViewPageArguments extends Object {
   final DateTime date;
@@ -22,6 +23,7 @@ class _EditViewState extends State<EditView> {
   final TextEditingController _controller = TextEditingController();
 
   double price = 10000;
+  String title = '';
   TimeOfDay time = TimeOfDay.fromDateTime(DateTime.now().toLocal());
 
   @override
@@ -58,6 +60,9 @@ class _EditViewState extends State<EditView> {
                   decoration: const InputDecoration(
                     hintText: '소비 정보를 입력하세요',
                   ),
+                  onChanged: (newValue) => setState(() {
+                    title = newValue;
+                  }),
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return '비워둘 수 없습니다!';
@@ -67,14 +72,18 @@ class _EditViewState extends State<EditView> {
                 ),
                 TextFormField(
                   controller: _controller,
+                  keyboardType: TextInputType.number,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return '비워둘 수 없습니다!';
                     }
                     return null;
                   },
-                  onEditingComplete: () {
-                    price = double.parse(_controller.text);
+                  onChanged: (newValue) {
+                    print("1");
+                    setState(() {
+                      price = double.parse(newValue);
+                    });
                   },
                 ),
                 Slider(
@@ -109,7 +118,13 @@ class _EditViewState extends State<EditView> {
                       // Valitime will return true if the form is valid, or false if
                       // the form is invalid.
                       if (_formKey.currentState!.validate()) {
-                        // Process data.
+                        DateTime currentDate = changeTime(DateTime.now(), time);
+                        // print('submit');
+                        bloc.addPayment(PaymentInfo(
+                            title: title,
+                            time: currentDate,
+                            price: price.toInt()));
+                        Navigator.pop(context);
                       }
                     },
                     child: const Text('Submit'),
