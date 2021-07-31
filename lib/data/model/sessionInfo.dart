@@ -1,3 +1,5 @@
+import 'package:cash_analyzer/utils/time.dart';
+
 class SessionInfo {
   late int _budget;
   late int _totalUse;
@@ -5,21 +7,16 @@ class SessionInfo {
   late DateTime _dDay;
   late bool _editable;
 
-  SessionInfo(
-      {required budget,
-      totalUse = 0,
-      required sDay,
-      DateTime? dDay}) : _budget = budget,
-      _totalUse = totalUse,
-      _sDay = sDay,
-      _editable = true {
-    if (dDay == null) {
-      _dDay = DateTime.parse('${sDay.year}-${sDay.month + 1}-${sDay.day}')
-          .subtract(Duration(
-              days: 1)); // TODO: change this value to reference config's value
-    } else {
-      _dDay = dDay;
-    }
+  SessionInfo({required budget})
+      : _budget = budget,
+        _totalUse = 0,
+        _editable = true {
+    DateTime sDay = removeTime(DateTime.now());
+    _sDay = sDay.subtract(Duration(days: sDay.day - 1));
+
+    String month = (_sDay.month + 1).toString().padLeft(2, '0');
+    _dDay = DateTime.parse('${_sDay.year}${month}01');
+    _dDay = _dDay.subtract(Duration(days: 1));
   }
 
   SessionInfo.fromJson(Map<String, dynamic> jsonData)

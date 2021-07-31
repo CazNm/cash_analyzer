@@ -3,7 +3,6 @@ import 'package:cash_analyzer/app/index.dart';
 import 'package:cash_analyzer/screens/main/GoalSection.dart';
 import 'package:cash_analyzer/screens/main/PaymentList.dart';
 import 'package:cash_analyzer/screens/setting/settingPage.dart';
-import 'package:cash_analyzer/utils/time.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = '/';
@@ -64,8 +63,7 @@ class MainPageState extends State<MainPage> {
     SessionInfo si = data.sessionInfo;
     List<String> keys = data.paymentListData.keys.toList();
     int todayUse = 0;
-    List<PaymentInfo>? paymentInfoList =
-        data.paymentListData[removeTime(DateTime.now()).toIso8601String()];
+    List<PaymentInfo>? paymentInfoList = data.findDate(DateTime.now());
     if (paymentInfoList != null) {
       paymentInfoList.forEach((element) {
         todayUse += element.price;
@@ -81,8 +79,7 @@ class MainPageState extends State<MainPage> {
                 SizedBox(height: 40),
                 GoalSection(si, todayUse),
               ],
-            )
-          ),
+            )),
         Expanded(
           flex: 65,
           child: Container(
@@ -95,7 +92,7 @@ class MainPageState extends State<MainPage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: keys.length,
                 itemBuilder: (BuildContext context, int index) {
-                  String key = keys[keys.length-1-index];
+                  String key = keys[keys.length - 1 - index];
                   return Container(
                       margin: EdgeInsets.only(right: index != 1 ? 18 : 0),
                       // child: PaymentList(PaymentListData(

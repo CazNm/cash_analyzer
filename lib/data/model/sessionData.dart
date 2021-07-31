@@ -10,13 +10,7 @@ class SessionData {
         _paymentListData = {};
 
   SessionData.fromJson(Map<String, dynamic> jsonData)
-      : _sessionInfo = SessionInfo.fromJson(jsonData['sessionInfo'])
-  // _paymentListData = Map.fromIterable(
-  //   jsonData['paymentListData'].,
-  //   value: (element) => List<PaymentInfo>.generate(
-  //       element.length, (index) => PaymentInfo.fromJson(element[index])),
-  // )
-  {
+      : _sessionInfo = SessionInfo.fromJson(jsonData['sessionInfo']) {
     _paymentListData = {};
     jsonData['paymentListData'].forEach((key, value) {
       _paymentListData[key] = List<PaymentInfo>.generate(
@@ -30,14 +24,17 @@ class SessionData {
       };
 
   SessionInfo get sessionInfo => _sessionInfo;
-  Map<String, List<PaymentInfo>> get paymentListData => _paymentListData;
-
-  List<PaymentInfo>? findDate(DateTime date) {
-    DateTime dateOnly = removeTime(date);
-    return _paymentListData[dateOnly.toIso8601String()];
+  Map<String, List<PaymentInfo>> get paymentListData {
+    return _paymentListData;
   }
 
-  void addPayment(PaymentInfo paymentInfo, {DateTime? date}) {
-    if (date != null) {}
+  List<PaymentInfo>? findDate(DateTime date) {
+    String dateStr = removeTime(date).toIso8601String();
+    if (_sessionInfo.isContain(date)) {
+      if (!_paymentListData.containsKey(dateStr)) {
+        _paymentListData[dateStr] = List<PaymentInfo>.empty();
+      }
+      return _paymentListData[dateStr];
+    }
   }
 }

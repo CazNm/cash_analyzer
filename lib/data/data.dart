@@ -15,15 +15,14 @@ class DataRepository {
     if (!_isLoaded) {
       _whileLoading = true;
 
-      // Map<String, dynamic>? parsedJson = await loadLocalData();
-      // if (parsedJson != null) {
-      //   // _data = DataModel.fromJson(parsedJson);
-      //   _data = DataModel.fromJson(await createFile());
-      // } else {
-      //   _data = DataModel.fromJson(await createFile());
-      // }
+      Map<String, dynamic>? parsedJson = await loadLocalData();
+      if (parsedJson != null) {
+        _data = DataModel.fromJson(parsedJson);
+      } else {
+        _data = DataModel.fromJson(await createFile());
+      }
 
-      _data = DataModel.fromJson(saveDataList);
+      // _data = DataModel.fromJson(saveDataList);
       
       if (_data.currentSession.findDate(DateTime.now()) == null) {
         _data.currentSession

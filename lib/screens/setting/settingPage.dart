@@ -120,7 +120,7 @@ class SettingPageState extends State<SettingPage> {
   Widget noticeOption(Settings settings) {
     return Row(
       children: [
-        Text("Notice ME! : ",
+        Text("Notice ME!(WIP) : ",
             style: whiteText(size: 20, fontWeight: FontWeight.bold)),
         Row(
           children: [

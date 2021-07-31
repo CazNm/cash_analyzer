@@ -25,22 +25,16 @@ class DataModel {
 
   List<SessionData> get allSessions => _sessionList;
   SessionData get currentSession {
-    if (_sessionList[0].sessionInfo.isContain(DateTime.now())) {
-      return _sessionList[0];
-    } else {
+    if (_sessionList.isEmpty ||
+        !_sessionList[0].sessionInfo.isContain(DateTime.now())) {
       _addNewSession();
-      return _sessionList[0];
     }
+    return _sessionList[0];
   }
 
   void _addNewSession() {
-    DateTime tempDate = removeTime(DateTime.now());
-    tempDate.subtract(Duration(days: tempDate.day - 1));
-
-    SessionInfo sessionInfo =
-        SessionInfo(budget: _settings.nextBudget, sDay: tempDate);
-
-    allSessions.insert(0, SessionData(sessionInfo));
+    allSessions.insert(
+        0, SessionData(SessionInfo(budget: _settings.nextBudget)));
   }
 
   Settings get settings => _settings;
