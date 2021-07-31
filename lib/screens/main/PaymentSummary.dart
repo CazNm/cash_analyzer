@@ -24,18 +24,12 @@ class PaymentSummaryTile {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(DateFormat("HH:mm").format(info.time),
-                      style: detail
-                          ? Theme.of(context).textTheme.bodyText1
-                          : Theme.of(context).textTheme.bodyText2),
+                      style: defaultText(Theme.of(context).accentColor, size: detail ? 18 : 14, lineHeight: 1.2)),
                   SizedBox(height: 2),
                   Text(info.title,
-                      style: detail
-                          ? Theme.of(context).textTheme.bodyText1
-                          : Theme.of(context).textTheme.bodyText2),
+                      style: defaultText(Theme.of(context).accentColor, size: detail ? 16 : 12, lineHeight: 1.2)),
                   Text("${info.price}원",
-                      style: detail
-                          ? Theme.of(context).textTheme.bodyText1
-                          : Theme.of(context).textTheme.bodyText2),
+                      style: defaultText(Theme.of(context).accentColor, size: detail ? 16 : 12, lineHeight: 1.2)),
                 ],
               ),
               detail
@@ -43,7 +37,7 @@ class PaymentSummaryTile {
                       onPressed: () {
                         bloc.removePayment(info);
                       },
-                      icon: Icon(Icons.delete, color: Theme.of(context).iconTheme.color),
+                      icon: Icon(Icons.delete, color: Theme.of(context).accentColor),
                       iconSize: 20,
                       splashRadius: 20,
                     )
