@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 // Define multi-used style like colors or text styles
 // maybe we can make another style file for app's theme selecting function
 
-Color mainPink = Color.fromRGBO(255, 200, 200, 1);
-Color mainGreen = Color.fromRGBO(209, 255, 237, 1);
-Color white = Colors.white;
-Color grey138 = Color.fromRGBO(138, 138, 138, 1.0);
-Color grey204 = Color.fromRGBO(204, 204, 204, 1.0);
-Color grey217 = Color.fromRGBO(217, 217, 217, 1.0);
-Color grey247 = Color.fromRGBO(247, 247, 247, 1.0);
-Color navyDark = Color.fromRGBO(10, 20, 36, 1.0);
-Color black = Color.fromRGBO(34, 34, 34, 1.0);
-Color black48 = Color.fromRGBO(48, 48, 48, 1.0);
-Color salmon = Color.fromRGBO(227, 119, 107, 1.0);
-Color lightBlue = Color.fromRGBO(180, 240, 255, 1.0);
-Map<String, Color> primaryColorList = {
+const Color mainPink = Color.fromRGBO(255, 200, 200, 1);
+const Color mainGreen = Color.fromRGBO(209, 255, 237, 1);
+const Color white = Colors.white;
+const Color grey138 = Color.fromRGBO(138, 138, 138, 1.0);
+const Color grey204 = Color.fromRGBO(204, 204, 204, 1.0);
+const Color grey217 = Color.fromRGBO(217, 217, 217, 1.0);
+const Color grey247 = Color.fromRGBO(247, 247, 247, 1.0);
+const Color navyDark = Color.fromRGBO(10, 20, 36, 1.0);
+const Color black = Color.fromRGBO(34, 34, 34, 1.0);
+const Color black48 = Color.fromRGBO(48, 48, 48, 1.0);
+const Color salmon = Color.fromRGBO(227, 119, 107, 1.0);
+const Color lightBlue = Color.fromRGBO(180, 240, 255, 1.0);
+const Map<String, Color> primaryColorList = {
   'salmon': salmon,
   'lightBlue': lightBlue,
 };

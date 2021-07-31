@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
           bodyText1:
               defaultText(accentColor, size: 16, fontWeight: FontWeight.w400),
           bodyText2: defaultText(accentColor),
+          caption: defaultText(white, size: 16, fontWeight: FontWeight.w400)
         ),
         iconTheme: IconThemeData(color: accentColor));
 
