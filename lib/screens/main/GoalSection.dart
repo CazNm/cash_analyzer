@@ -1,21 +1,14 @@
-import 'package:cash_analyzer/app/index.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-class SessionInfo {
-  int budget;
-  int totalUse;
-  int todayUse;
-  DateTime sDay;
-  DateTime dDay;
-
-  SessionInfo(this.budget, this.totalUse, this.todayUse, this.sDay, this.dDay);
-}
+import 'package:flutter/material.dart';
+import 'package:cash_analyzer/app/index.dart';
+import 'package:cash_analyzer/data/model.dart';
 
 class GoalSection extends StatelessWidget {
+  final _editCont = TextEditingController();
   final SessionInfo data;
-  
-  const GoalSection(this.data, {Key? key}) : super(key: key);
+  final int todayUse;
+
+  GoalSection(this.data, this.todayUse, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +40,51 @@ class GoalSection extends StatelessWidget {
                   style: whiteText(size: 12),
                 ),
                 SizedBox(height: 30),
-                Text("오늘 사용한 금액 : ${data.todayUse}원",
-                    style: whiteText(size: 22)),
+                Text("오늘 사용한 금액 : $todayUse원", style: whiteText(size: 22)),
               ],
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.edit, color: white))
+            buildButton(context)
           ],
         ),
       ),
     );
+  }
+
+  Widget buildButton(context) {
+    if (data.editable) {
+      return IconButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return Dialog(
+                  child: Container(
+                    height: 120,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Text('예산을 입력하세요'),
+                          TextField(
+                            controller: _editCont,
+                            autofocus: true,
+                            keyboardType: TextInputType.number,
+                            onEditingComplete: () {
+                              bloc.changeBudget(int.parse(_editCont.value.text));
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          icon: Icon(Icons.edit, color: white));
+    } else {
+      return IconButton(
+          onPressed: null, icon: Icon(Icons.edit_off, color: Colors.grey));
+    }
   }
 }

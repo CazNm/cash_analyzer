@@ -1,8 +1,8 @@
-// import 'package:cash_analyzer/screens/detail/detailView.dart';
-import 'package:cash_analyzer/screens/edit/editView.dart';
-import 'package:cash_analyzer/screens/main/mainListView.dart';
-import 'package:cash_analyzer/screens/detail/detailView.dart';
-import 'package:cash_analyzer/screens/setting/setting.dart';
+// import 'package:cash_analyzer/screens/detail/DetailPage.dart';
+import 'package:cash_analyzer/screens/edit/editPage.dart';
+import 'package:cash_analyzer/screens/main/mainPage.dart';
+import 'package:cash_analyzer/screens/detail/detailPage.dart';
+import 'package:cash_analyzer/screens/setting/settingPage.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -10,18 +10,18 @@ import 'package:flutter/material.dart';
 class CustomRouter {
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case MainListViewHome.routeName:
-        return MaterialPageRoute(builder: (_) => MainListViewHome());
+      case MainPage.routeName:
+        return MaterialPageRoute(builder: (_) => MainPage());
 
-      case DetailView.routeName:
+      case DetailPage.routeName:
         return MaterialPageRoute(
-            builder: (context) => DetailView(
-                  args: settings.arguments as DetailViewPageArguments,
+            builder: (context) => DetailPage(
+                  args: settings.arguments as DetailPageArguments,
                 ));
 
-      case EditView.routeName:
-        return MaterialPageRoute(builder: (context) => EditView(
-          args: settings.arguments as EditViewPageArguments,
+      case EditPage.routeName:
+        return MaterialPageRoute(builder: (context) => EditPage(
+          args: settings.arguments as EditPageArguments,
         ));
 
       case SettingPage.routeName:

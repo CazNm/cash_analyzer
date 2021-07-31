@@ -1,7 +1,8 @@
-import 'package:cash_analyzer/screens/main/mainListView.dart';
-import 'package:cash_analyzer/app/index.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:cash_analyzer/app/index.dart';
+
+import 'package:cash_analyzer/screens/main/mainPage.dart';
 
 void main() {
   setupLocator();
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       title: 'Flutter Demo',
       onGenerateRoute: router.generateRoute,
-      home: MainListViewHome(),
+      home: MainPage(),
       navigatorKey: service!.navigatorKey,
     );
   }
