@@ -27,7 +27,7 @@ class PaymentList extends StatelessWidget {
       child: Container(
         width: 200,
         decoration: BoxDecoration(
-          color: salmon,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: ClipRRect(
@@ -48,13 +48,13 @@ class PaymentList extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Text(
                       "$dateString 사용 내역",
-                      style: whiteText(size: 16, fontWeight: FontWeight.w400),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ));
               } else if (index == data.paymentInfoList.length + 1) {
                 // last
                 w = Text(
                   "....",
-                  style: whiteText(),
+                  style: Theme.of(context).textTheme.bodyText2,
                 );
               } else {
                 w = PaymentSummaryTile(data.paymentInfoList[index - 1])

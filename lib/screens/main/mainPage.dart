@@ -33,7 +33,7 @@ class MainPageState extends State<MainPage> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: black48,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: StreamBuilder<SessionData>(
@@ -52,7 +52,6 @@ class MainPageState extends State<MainPage> {
           icon: Icon(Icons.settings, color: white),
           onPressed: () {
             service!.navigateTo(SettingPage.routeName);
-            print("setting button");
           },
         ),
       ),

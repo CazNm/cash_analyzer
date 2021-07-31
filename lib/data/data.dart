@@ -22,13 +22,6 @@ class DataRepository {
         _data = DataModel.fromJson(await createFile());
       }
 
-      // _data = DataModel.fromJson(saveDataList);
-      
-      if (_data.currentSession.findDate(DateTime.now()) == null) {
-        _data.currentSession
-            .paymentListData[removeTime(DateTime.now()).toIso8601String()] = <PaymentInfo>[];
-      }
-
       _isLoaded = true;
       _whileLoading = false;
     }
@@ -40,7 +33,7 @@ class DataRepository {
   bool get whileLoading => _whileLoading;
 
   Future<bool> saveData() async {
-    // return await saveLocalDataFromObject(_data) != null;
-    return true;
+    return await saveLocalDataFromObject(_data) != null;
+    // return true;
   }
 }

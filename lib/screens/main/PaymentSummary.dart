@@ -14,7 +14,7 @@ class PaymentSummaryTile {
     return Container(
         padding: EdgeInsets.only(bottom: 7),
         decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(width: 1, color: white))),
+            border: Border(bottom: BorderSide(width: 1, color: Theme.of(context).accentColor))),
         child: Material(
           type: MaterialType.transparency,
           child: Row(
@@ -24,15 +24,18 @@ class PaymentSummaryTile {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(DateFormat("HH:mm").format(info.time),
-                      style:
-                          whiteText(size: detail ? 18 : 14, lineHeight: 1.2)),
+                      style: detail
+                          ? Theme.of(context).textTheme.bodyText1
+                          : Theme.of(context).textTheme.bodyText2),
                   SizedBox(height: 2),
                   Text(info.title,
-                      style:
-                          whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
+                      style: detail
+                          ? Theme.of(context).textTheme.bodyText1
+                          : Theme.of(context).textTheme.bodyText2),
                   Text("${info.price}원",
-                      style:
-                          whiteText(size: detail ? 16 : 12, lineHeight: 1.2)),
+                      style: detail
+                          ? Theme.of(context).textTheme.bodyText1
+                          : Theme.of(context).textTheme.bodyText2),
                 ],
               ),
               detail
@@ -40,7 +43,7 @@ class PaymentSummaryTile {
                       onPressed: () {
                         bloc.removePayment(info);
                       },
-                      icon: Icon(Icons.delete, color: white),
+                      icon: Icon(Icons.delete, color: Theme.of(context).iconTheme.color),
                       iconSize: 20,
                       splashRadius: 20,
                     )
