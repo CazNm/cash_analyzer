@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
           headline2: defaultText(white, size: 22, fontWeight: FontWeight.bold),
           headline3: defaultText(white, size: 22),
           headline4: defaultText(white, size: 18),
+          headline5: defaultText(white),
           bodyText1:
               defaultText(accentColor, size: 16, fontWeight: FontWeight.w400),
           bodyText2: defaultText(accentColor),

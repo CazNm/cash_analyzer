@@ -36,7 +36,7 @@ class GoalSection extends StatelessWidget {
                 SizedBox(height: 2),
                 Text(
                   "기간 : ${DateFormat('MM/dd').format(data.sDay)} ~ ${DateFormat('MM/dd').format(data.dDay)}",
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.headline5,
                 ),
                 SizedBox(height: 30),
                 Text("오늘 사용한 금액 : $todayUse원",
