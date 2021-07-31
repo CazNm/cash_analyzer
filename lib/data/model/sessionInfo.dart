@@ -16,7 +16,7 @@ class SessionInfo {
 
     String month = (_sDay.month + 1).toString().padLeft(2, '0');
     _dDay = DateTime.parse('${_sDay.year}${month}01');
-    _dDay = _dDay.subtract(Duration(days: 1));
+    _dDay = _dDay.subtract(Duration(milliseconds: 1));
   }
 
   SessionInfo.fromJson(Map<String, dynamic> jsonData)

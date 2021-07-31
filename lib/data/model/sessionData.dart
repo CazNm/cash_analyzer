@@ -7,15 +7,19 @@ class SessionData {
 
   SessionData(SessionInfo sessionInfo)
       : _sessionInfo = sessionInfo,
-        _paymentListData = {};
+        _paymentListData = {} {
+    findDate(DateTime.now());
+  }
 
   SessionData.fromJson(Map<String, dynamic> jsonData)
       : _sessionInfo = SessionInfo.fromJson(jsonData['sessionInfo']) {
     _paymentListData = {};
     jsonData['paymentListData'].forEach((key, value) {
       _paymentListData[key] = List<PaymentInfo>.generate(
-          value.length, (index) => PaymentInfo.fromJson(value[index]));
+          value.length, (index) => PaymentInfo.fromJson(value[index]), growable: true);
     });
+    
+    findDate(DateTime.now());
   }
 
   Map<String, dynamic> toJson() => {
@@ -32,7 +36,7 @@ class SessionData {
     String dateStr = removeTime(date).toIso8601String();
     if (_sessionInfo.isContain(date)) {
       if (!_paymentListData.containsKey(dateStr)) {
-        _paymentListData[dateStr] = List<PaymentInfo>.empty();
+        _paymentListData[dateStr] = List<PaymentInfo>.empty(growable: true);
       }
       return _paymentListData[dateStr];
     }

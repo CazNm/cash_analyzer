@@ -25,22 +25,22 @@ class GoalSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("목표 금액 : ",
-                        style:
-                            whiteText(size: 28, fontWeight: FontWeight.bold)),
+                        style: Theme.of(context).textTheme.headline1),
                     SizedBox(height: 12),
                     Text(
                       "${data.totalUse}원/${data.budget}원",
-                      style: whiteText(size: 22, fontWeight: FontWeight.normal),
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                   ],
                 ),
                 SizedBox(height: 2),
                 Text(
                   "기간 : ${DateFormat('MM/dd').format(data.sDay)} ~ ${DateFormat('MM/dd').format(data.dDay)}",
-                  style: whiteText(size: 12),
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
                 SizedBox(height: 30),
-                Text("오늘 사용한 금액 : $todayUse원", style: whiteText(size: 22)),
+                Text("오늘 사용한 금액 : $todayUse원",
+                    style: Theme.of(context).textTheme.headline3),
               ],
             ),
             buildButton(context)
@@ -69,7 +69,8 @@ class GoalSection extends StatelessWidget {
                             autofocus: true,
                             keyboardType: TextInputType.number,
                             onEditingComplete: () {
-                              bloc.changeBudget(int.parse(_editCont.value.text));
+                              bloc.changeBudget(
+                                  int.parse(_editCont.value.text));
                               Navigator.pop(context);
                             },
                           ),

@@ -48,15 +48,18 @@ class _EditPageState extends State<EditPage> {
           child: Text("Cazh Analyzer"),
         ),
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         padding: EdgeInsets.all(8),
         child: Material(
+          color: Theme.of(context).backgroundColor,
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 TextFormField(
+                  style: Theme.of(context).textTheme.bodyText1,
                   decoration: const InputDecoration(
                     hintText: '소비 정보를 입력하세요',
                   ),
@@ -73,6 +76,7 @@ class _EditPageState extends State<EditPage> {
                 TextFormField(
                   controller: _controller,
                   keyboardType: TextInputType.number,
+                  style: Theme.of(context).textTheme.bodyText1,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return '비워둘 수 없습니다!';
