@@ -64,6 +64,7 @@ class DataProcessBloc extends Bloc {
     final data = await repo.loadData();
     data.settings.theme = value;
     if (await repo.saveData()) {
+      _settingController.add(data.settings);
       return true;
     } else {
       return false;

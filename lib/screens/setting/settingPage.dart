@@ -98,7 +98,7 @@ class SettingPageState extends State<SettingPage> {
         _salmon.checkValue = true;
         _lightBlue.checkValue = false;
         bloc.toggleTheme('salmon');
-        setState(() {});
+        print("salmon color");
       }),
       SizedBox(
         width: 15,
@@ -112,7 +112,7 @@ class SettingPageState extends State<SettingPage> {
         _salmon.checkValue = false;
         _lightBlue.checkValue = true;
         bloc.toggleTheme('lightBlue');
-        setState(() {});
+        print("lightBlue color");
       })
     ]);
   }

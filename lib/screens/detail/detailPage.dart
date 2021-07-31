@@ -27,7 +27,7 @@ class _DetailPageState extends State<DetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      print('_DetailPageState.build microtask start');
+      // print('_DetailPageState.build microtask start');
       bloc.fetchPaymentList(this.widget.args.date);
     });
 
@@ -43,7 +43,7 @@ class _DetailPageState extends State<DetailPage> {
     // final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: black48,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: StreamBuilder<List<PaymentInfo>>(
             stream: bloc.paymentStream,
             builder: (context, snapshot) {
@@ -79,19 +79,19 @@ class _DetailPageState extends State<DetailPage> {
             children: [
               Text(
                 "$dateString 사용 내역",
-                style: whiteText(size: 22, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headline2,
               ),
               SizedBox(height: 6),
               Text(
                 "총 : $use",
-                style: whiteText(size: 18, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headline4,
               ),
               SizedBox(height: 50),
               Expanded(
                 flex: 1,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: salmon,
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ClipRRect(
