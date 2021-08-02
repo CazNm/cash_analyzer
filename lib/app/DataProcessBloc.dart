@@ -32,15 +32,18 @@ class DataProcessBloc extends Bloc {
 
   void fetchPaymentList(DateTime date) async {
     final data = await repo.loadData();
-
-    List<PaymentInfo>? list = data.findSession(date)!.findDate(date);
-    if (list != null) {
-      _paymentsController.add(list);
-      print("fetchPaymentList success");
-    } else {
-      _paymentsController
-          .addError("error in fetchPaymentList: cannot found current date");
+    var sessionData = data.findSession(date);
+    if (sessionData != null) {
+      List<PaymentInfo>? list = sessionData.findDate(date);
+      if (list != null) {
+        _paymentsController.add(list);
+        print("fetchPaymentList success");
+        return;
+      }
     }
+
+    _paymentsController.addError(
+        "error in fetchPaymentList: cannot found date ${date.toString()}");
   }
 
   void fetchSettings() async {

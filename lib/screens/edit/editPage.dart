@@ -53,6 +53,7 @@ class _EditPageState extends State<EditPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                SizedBox(height: 80),
                 TextFormField(
                   style: Theme.of(context).textTheme.caption,
                   decoration: const InputDecoration(

@@ -15,7 +15,9 @@ export 'package:cash_analyzer/app/blocProvider.dart';
 // GetIt manage factory fuctions and singletons witch is globaly, frequently used?
 GetIt locator = GetIt.instance;
 NavigationService? service;
-late DataRepository repo;
+// NavigationService service = NavigationService();
+// registerLazySingleton create static instance
+DataRepository repo = DataRepository();
 DataProcessBloc bloc = DataProcessBloc();
 
 BuildContext? context = service!.navigatorKey.currentContext;
@@ -42,9 +44,9 @@ void setupLocator() {
   locator.registerLazySingleton(() => NavigationService());
   service = locator<NavigationService>();
 
-  locator.registerLazySingleton(() => DataRepository());
-  repo = locator<DataRepository>();
+  // locator.registerLazySingleton(() => DataRepository());
+  // repo = locator<DataRepository>();
   
-  locator.registerLazySingleton(() => DataProcessBloc());
-  bloc = locator<DataProcessBloc>();
+  // locator.registerLazySingleton(() => DataProcessBloc());
+  // bloc = locator<DataProcessBloc>();
 }
