@@ -43,11 +43,6 @@ class _EditPageState extends State<EditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Cazh Analyzer"),
-        ),
-      ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         padding: EdgeInsets.all(8),
