@@ -43,11 +43,6 @@ class _EditPageState extends State<EditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Cazh Analyzer"),
-        ),
-      ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
         padding: EdgeInsets.all(8),
@@ -58,6 +53,7 @@ class _EditPageState extends State<EditPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                SizedBox(height: 80),
                 TextFormField(
                   style: Theme.of(context).textTheme.caption,
                   decoration: const InputDecoration(

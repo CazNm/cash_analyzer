@@ -28,8 +28,6 @@ class MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final bloc = BlocProvider.of<DataProcessBloc>(context)!.bloc;
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -92,6 +90,8 @@ class MainPageState extends State<MainPage> {
                 itemCount: keys.length,
                 itemBuilder: (BuildContext context, int index) {
                   String key = keys[keys.length - 1 - index];
+                  print(key);
+                  print(data.paymentListData[key]);
                   return Container(
                       margin: EdgeInsets.only(right: index != 1 ? 18 : 0),
                       // child: PaymentList(PaymentListData(

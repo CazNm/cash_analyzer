@@ -1,6 +1,6 @@
 import 'package:cash_analyzer/data/file.dart';
 import 'package:cash_analyzer/data/model.dart';
-import 'package:cash_analyzer/utils/time.dart';
+// import 'package:cash_analyzer/utils/time.dart';
 
 class DataRepository {
   late DataModel _data;
@@ -16,6 +16,8 @@ class DataRepository {
       _whileLoading = true;
 
       Map<String, dynamic>? parsedJson = await loadLocalData();
+      print("loadData from file");
+      print(parsedJson);
       if (parsedJson != null) {
         _data = DataModel.fromJson(parsedJson);
       } else {
@@ -25,6 +27,7 @@ class DataRepository {
       _isLoaded = true;
       _whileLoading = false;
     }
+      print("loadData from memory");
     return _data;
   }
 

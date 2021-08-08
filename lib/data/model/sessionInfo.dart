@@ -30,7 +30,7 @@ class SessionInfo {
         'budget': budget,
         'totalUse': totalUse,
         'sDay': sDay.toIso8601String(),
-        'dDay': sDay.toIso8601String(),
+        'dDay': dDay.toIso8601String(),
         'editable': editable,
       };
 

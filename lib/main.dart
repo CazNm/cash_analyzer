@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       theme: appTheme,
-      title: 'Flutter Demo',
+      title: 'Cash Analyzer',
       onGenerateRoute: router.generateRoute,
       home: MainPage(),
       navigatorKey: service!.navigatorKey,

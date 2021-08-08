@@ -6,9 +6,8 @@ import 'package:path_provider/path_provider.dart';
 // flutter 2.13.0 or above
 // typedef Json = Map<String, dynamic>;
 
-// TODO: add setting data
 Map<String, dynamic> defaultData = {
-  'data': [],
+  'data': {},
   'settings': {
     'notice': false,
     'theme': 'salmon', // salmon or lightBlue
